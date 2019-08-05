@@ -23,14 +23,15 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 // posts scheduled dates to the database.
-router.post('/', (req,res) =>{
+router.post('/', (req,res) => {
     console.log('req.body', req.body)
     const newTripTimes = req.body;
-    const queryText = `INSERT INTO "schedule" ("start_date", "end_date", "open_closed")
-    VALUES ($1, $2, $3);`;
+    const queryText = `INSERT INTO "schedule" ("start_date", "end_date", "user_id", "open_closed")
+    VALUES ($1, $2, $3, $4);`;
     const queryValues = [
         newTripTimes.startDate,
         newTripTimes.endDate,
+        newTripTimes.user_id,
         newTripTimes.reserve,
         
     ];

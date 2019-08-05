@@ -18,6 +18,7 @@ class Calendar extends Component {
         newTripTime: {
             startDate: '', //new Date()
             endDate:  '',
+            user_id: this.props.reduxStore.user.id,
             reserve: '', // this will need to change to a reservation time. Then bring in the props for the user name to show on the map.
         }
     }
@@ -45,7 +46,7 @@ render() {
   return (
     <>
     <div>
-        {JSON.stringify(this.state)}
+        {JSON.stringify(this.props.reduxStore.user.id)}
       <form onSubmit={this.handleSubmit}>
           <label>Start Date:</label>   
       <input type="date" min="2018-08-04" max="2020-04-02" 
@@ -73,7 +74,9 @@ render() {
 }
 
     const mapStateToProps = reduxStore =>({
-        reduxStore
+        reduxStore,
+       
+
     });
 
 export default connect(mapStateToProps)(Calendar);
