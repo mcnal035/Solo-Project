@@ -9,45 +9,26 @@ CREATE TABLE "user" (
     "password" VARCHAR (1000) NOT NULL
 );
 
-CREATE TABLE "user" (
-	"id" serial NOT NULL UNIQUE,
-	"username" varchar(40) NOT NULL UNIQUE,
-	"password" varchar(40) NOT NULL,
-	"first_name" varchar(40) NOT NULL UNIQUE,
-	"last_name" varchar(40) NOT NULL,
-	"phone_number" varchar(20),
-	CONSTRAINT "user_pk" PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
-
-
-
 CREATE TABLE "guest_log" (
+	"id" serial PRIMARY KEY,
 	"text" varchar(999),
-	"user_id" int NOT NULL,
-	"date_stamp" DATE NOT NULL,
-	CONSTRAINT "guest_log_pk" PRIMARY KEY ("user_id")
-) WITH (
-  OIDS=FALSE
-);
+	"user_id" int REFERENCES "user",
+	"date_stamp" DATE
+	);
+	
 
 
 
 CREATE TABLE "schedule" (
-	"id" serial NOT NULL,
-	"start_date" DATE NOT NULL,
-	"end_date" DATE NOT NULL,
-	"reservation" varchar(255) NOT NULL,
-	"open_closed" BOOLEAN,
-	CONSTRAINT "schedule_pk" PRIMARY KEY ("id")
-) WITH (
-  OIDS=FALSE
-);
+	"id" serial PRIMARY KEY,
+	"start_date" DATE,
+	"end_date" DATE,
+	"user_id" INT REFERENCES "user",
+	"open_closed" BOOLEAN
+	);
 
-
-
-ALTER TABLE "user" ADD CONSTRAINT "user_fk0" FOREIGN KEY ("id") REFERENCES "guest_log"("user_id");
-
-
-ALTER TABLE "schedule" ADD CONSTRAINT "schedule_fk0" FOREIGN KEY ("reservation") REFERENCES "user"("first_name");
+ALTER TABLE "user"
+ADD COLUMN "first_name" varchar(40) UNIQUE,
+ADD COLUMN	"last_name" varchar(40),
+ADD COLUMN	"phone_number" varchar(20)
+	;
