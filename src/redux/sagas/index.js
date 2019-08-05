@@ -4,6 +4,7 @@ import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import {takeEvery} from 'redux-saga/effects';
 import fetchList from './fetchListSaga'
+import postList from './postSaga'
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -14,6 +15,7 @@ import fetchList from './fetchListSaga'
 // and login triggers setting the user
 export default function* rootSaga() {
   yield takeEvery('FETCH_LIST', fetchList);
+  yield takeEvery('ADD_DATE', postList);
   yield all([
     loginSaga(),
     registrationSaga(),
