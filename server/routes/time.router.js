@@ -51,10 +51,11 @@ router.post('/', (req,res) => {
 router.put('/:id', (req,res)=>{
     console.log('req.params.id', req.params.id);
     console.log('req.body', req.body);
+    console.log('req.user.id', req.user.id);
     const idToUpdate = req.params.id;
     const date = req.body;
-    const sqlText = `UPDATE schedule SET start_date=$1, end_date=$2 WHERE user_id=$3 id = $4;`;
-    const values = [date.updateStartDate, date.updateEndDate, date.id, idToUpdate];
+    const sqlText = `UPDATE schedule SET start_date=$1, end_date=$2 WHERE user_id=$3 AND id = $4;`;
+    const values = [date.updateStartDate, date.updateEndDate, req.user.id, idToUpdate];
     pool.query(sqlText, values)
     .then(response =>{
         res.sendStatus(200);

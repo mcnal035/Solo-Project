@@ -4,9 +4,9 @@ import axios from 'axios';
 
 
 function* editSaga(action){
-    console.log('action.payload.id', action.payload);
+    console.log('action.payload.id', action.payload.itemId);
     try{
-        yield axios.put(`/api/schedule/${action.payload.id}`, action.payload)
+        yield axios.put(`/api/schedule/${action.payload.itemId}`, action.payload)
         yield put({type: 'FETCH_LIST'})
     }
     catch(error){
