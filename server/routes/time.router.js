@@ -10,7 +10,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/', rejectUnauthenticated, (req, res) => {
     console.log(req.user)
     // return all times
-    const queryText = `SELECT "user"."username", "schedule"."start_date", "schedule"."end_date", "schedule"."open_closed", "user"."id","schedule"."user_id" 
+    const queryText = `SELECT "user"."username", "schedule"."start_date", "schedule"."end_date", "schedule"."open_closed", "user"."id","schedule"."user_id", "schedule"."id" 
     from "user"
     JOIN "schedule" ON "schedule"."user_id" = "user"."id"
     ORDER BY "start_date" ASC;`;
@@ -45,5 +45,23 @@ router.post('/', (req,res) => {
       res.sendStatus(500);
     });
 });
+
+
+
+router.put('/:id', (req,res)=>{
+    console.log('req.params.id', req.params.id);
+    console.log('req.body', req.body);
+    const idToUpdate = req.params.id;
+    const date = req.body;
+    const sqlText = `UPDATE schedule SET start_date=$1, end_date=$2 WHERE user_id=$3 id = $4;`;
+    const values = [date.updateStartDate, date.updateEndDate, date.id, idToUpdate];
+    pool.query(sqlText, values)
+    .then(response =>{
+        res.sendStatus(200);
+    })
+    .catch(error=>{
+        console.log('error in put to edit item', error);
+    })
+})
 
 module.exports = router;
