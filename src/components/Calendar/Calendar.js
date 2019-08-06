@@ -18,8 +18,8 @@ class Calendar extends Component {
         newTripTime: {
             startDate: '', //new Date()
             endDate:  '',
-            user_id: this.props.reduxStore.user.id,
-            reserve: '', // this will need to change to a reservation time. Then bring in the props for the user name to show on the map.
+            // user_id: this.props.reduxStore.user.id,
+            reserve: 'open', // this will need to change to a reservation time. Then bring in the props for the user name to show on the map.
         }
     }
     //Fetch precreated DB List
