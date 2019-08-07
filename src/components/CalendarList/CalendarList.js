@@ -26,26 +26,9 @@ class CalendarList extends Component {
        
         return(
             <>
-             <p>Calendar and dates</p>
-         
-                
+             <h2>Calendar and Dates</h2>    
                 {this.props.reduxStore.getTrip.map(item => 
                 <CalendarItem  key={item.id} item={item}/>)}
-                    {/* <>
-                    <TableRow key={item.id} value={item.id}>
-                        <TableCell>Reserved:<br/> <br/> {item.username} <br/></TableCell> 
-                        <TableCell>Start: {item.start_date.substring(5, 7)+ "/" + item.start_date.substring(8,10)+ "/" + item.start_date.substring(0,4)}<br/></TableCell>
-                        <TableCell>End: {item.end_date.substring(5, 7)+ "/" + item.end_date.substring(8,10)+ "/" + item.end_date.substring(0,4)} <br/></TableCell>
-                        <TableCell classId={styles.notShow}>{this.checkId(item)}</TableCell>
-                        <TableCell>{this.handleEdit(item)}</TableCell>
-                        <Button onClick={this.toggleDrawer('right', true)}>Open Right</Button>
-                    </TableRow>
-                    </> */}
-                    
-                    
-                    
-
-
             </>
         )
     } 

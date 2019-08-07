@@ -63,6 +63,21 @@ router.put('/:id', (req,res)=>{
     .catch(error=>{
         console.log('error in put to edit item', error);
     })
+});
+
+
+
+router.delete('/id', (req, res) =>{
+    const idToDelete = req.params.id;
+    const sqlText = `DELETE FROM schedule WHERE user_id=$1 AND id=$2;`;
+    pool.query(sqlText, [req.user.id, idToDelete])
+        .then(repsonse =>{
+            res.sendStatus(200);
+        })
+        .catch(error =>{
+            console.log('error in DELETE', error);
+            res.sendStatus(500);
+        })
 })
 
 module.exports = router;
