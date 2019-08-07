@@ -57,24 +57,24 @@ router.put('/:id', (req,res)=>{
     const sqlText = `UPDATE schedule SET start_date=$1, end_date=$2 WHERE user_id=$3 AND id = $4;`;
     const values = [date.updateStartDate, date.updateEndDate, req.user.id, idToUpdate];
     pool.query(sqlText, values)
-    .then(response =>{
+    .then(response => {
         res.sendStatus(200);
     })
-    .catch(error=>{
+    .catch(error => {
         console.log('error in put to edit item', error);
     })
 });
 
 
 
-router.delete('/id', (req, res) =>{
+router.delete('/:id',rejectUnauthenticated, (req, res) =>{
     const idToDelete = req.params.id;
     const sqlText = `DELETE FROM schedule WHERE user_id=$1 AND id=$2;`;
     pool.query(sqlText, [req.user.id, idToDelete])
-        .then(repsonse =>{
+        .then(response => {
             res.sendStatus(200);
         })
-        .catch(error =>{
+        .catch(error => {
             console.log('error in DELETE', error);
             res.sendStatus(500);
         })

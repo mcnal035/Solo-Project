@@ -52,7 +52,7 @@ class CalendarItem extends Component {
         this.props.dispatch({type: 'EDIT_ITEM', payload: this.state.editDate});
         this.handleClose();
     }
-    
+
 
 
       checkId = (item) =>{
@@ -61,6 +61,12 @@ class CalendarItem extends Component {
            <Button onClick={this.handleClickOpen}>Edit</Button></>)
         }
     } 
+
+    handleDelete = () =>{
+        this.props.dispatch({type: 'DELETE_ITEM', payload: this.props.item.id})
+        console.log('clicked Delete')
+        this.handleClose();
+    }
 
 
     //Material UI functions
@@ -101,10 +107,13 @@ class CalendarItem extends Component {
             </form>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+          <Button onClick={ () => this.handleDelete() } color="secondary">
+              DELETE DATE
+            </Button>
+            <Button onClick={ this.handleClose } color="primary">
               Back
             </Button>
-            <Button onClick={this.handleEditSubmit} color="primary"> 
+            <Button onClick={ this.handleEditSubmit } color="primary"> 
               Submit
             </Button>
           </DialogActions>
