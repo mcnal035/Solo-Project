@@ -2,12 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 import CalendarItem from '../CalendarItem/CalendarItem';
-
-
 import { withStyles } from '@material-ui/core/styles';
 
-
-import './CalendarList.css';
 
 const styles = {
     list: {
