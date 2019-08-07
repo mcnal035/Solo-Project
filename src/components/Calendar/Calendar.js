@@ -8,7 +8,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import CalendarList from '../CalendarList/CalendarList';
-
+import Button from '@material-ui/core/Button';
 
 
 
@@ -18,7 +18,7 @@ class Calendar extends Component {
         newTripTime: {
             startDate: '', //new Date()
             endDate:  '',
-            // user_id: this.props.reduxStore.user.id,
+           
             reserve: 'open', // this will need to change to a reservation time. Then bring in the props for the user name to show on the map.
         }
     }
@@ -45,29 +45,29 @@ class Calendar extends Component {
 render() {
   return (
     <>
-    <div>
-        {JSON.stringify(this.props.reduxStore.user.id)}
+        <h1>Arranmore</h1>
       <form onSubmit={this.handleSubmit}>
           <label>Start Date:</label>   
       <input type="date" min="2018-08-04" max="2020-04-02" 
-       onChange={(event) => this.handleChange(event, 'startDate')} />
-       <label>End Date:</label>
+            onChange={(event) => this.handleChange(event, 'startDate')} />
+       <br/><label>End Date:</label>
        <input type="date"  
-       onChange={(event) => this.handleChange(event, 'endDate')}
+            onChange={(event) => this.handleChange(event, 'endDate')}
        />
-       <label>Name:</label> 
-       <select type="text" 
-        
-       onChange={(event) => this.handleChange(event, 'reserve')}>
+      <br/> 
+       <select type="text"
+            onChange={(event) => this.handleChange(event, 'reserve')}>
          <option value="reserved">Reserved</option>
          <option value="open">Open</option>
          </select> 
-          <button type="submit">Submit</button>
+          <Button type="submit">Submit</Button>
       </form>
+      <div></div>
+      
       <div>
         <CalendarList />
       </div>
-    </div>
+    
     </>
   );
 }

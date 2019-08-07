@@ -9,7 +9,7 @@ function* fetchList () {
         console.log('in fetchList', response);
         yield put({type: 'SET_LIST', payload: response.data})
         console.log('response.data', response.data);
-    } catch (error){
+    } catch (error) {
         console.log('error in GETTing Dates', error)
     }
 }
