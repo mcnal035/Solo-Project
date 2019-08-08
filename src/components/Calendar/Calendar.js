@@ -9,22 +9,59 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import CalendarList from '../CalendarList/CalendarList';
 import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
+
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import ReactDOM from 'react-dom';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+
+
+const styles = theme => ({
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+    },
+    formControl: {
+      margin: theme.spacing.unit,
+      minWidth: 400,
+    },
+    textField: {
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+      width: 400,
+    },
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+      },
+      formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 120,
+      },
+      selectEmpty: {
+        marginTop: theme.spacing.unit * 2,
+      },
+  });
 
 
 
 class Calendar extends Component {
     
     state = {
+        labelWidth: 0,
         newTripTime: {
             startDate: '', //new Date()
             endDate:  '',
-           
-            reserve: 'open', // this will need to change to a reservation time. Then bring in the props for the user name to show on the map.
+            reserve: 'none', // this will need to change to a reservation time. Then bring in the props for the user name to show on the map.
         }
     }
     //Fetch precreated DB List
     componentDidMount(){
         this.props.dispatch({type:'FETCH_LIST'});
+       
     }
 
     handleChange = (event, propertyName) => {
@@ -43,24 +80,54 @@ class Calendar extends Component {
     }
 
 render() {
+    const { classes } = this.props;
   return (
     <>
-        <h1>Arranmore</h1>
-      <form onSubmit={this.handleSubmit}>
-          <label>Start Date:</label>   
-      <input type="date" min="2018-08-04" max="2020-04-02" 
-            onChange={(event) => this.handleChange(event, 'startDate')} />
-       <br/><label>End Date:</label>
-       <input type="date"  
-            onChange={(event) => this.handleChange(event, 'endDate')}
-       />
+        
+        {this.state.reduxStore}
+      <form onSubmit={this.handleSubmit} className={classes.root} autoComplete="off">
+          
+        <TextField
+                  id="date"
+                  label="Start"
+                  type="date"
+                  defaultValue=''
+                  onChange={(event) => this.handleChange(event, 'startDate')}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                /><br />
+      
+      
+      <br /><TextField
+                  id="date"
+                  label="End"
+                  type="date"
+                  defaultValue=''
+                  onChange={(event) => this.handleChange(event, 'endDate')}
+                  className={classes.textField}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                /> 
       <br/> 
-       <select type="text"
-            onChange={(event) => this.handleChange(event, 'reserve')}>
-         <option value="reserved">Reserved</option>
-         <option value="open">Open</option>
-         </select> 
-          <Button type="submit">Submit</Button>
+         <FormControl className={classes.formControl}>
+          <InputLabel htmlFor="age-simple">Open/Reserved</InputLabel>
+          <Select
+            value={this.state.newTripTime.reserve}
+            onChange={(event) => this.handleChange(event, 'reserve')}
+            inputProps={{
+              name: 'reserved',
+            }}
+          >
+            <MenuItem value=""><em>None</em></MenuItem>
+            <MenuItem value={"reserved"}>Reserved</MenuItem>
+            <MenuItem value={"open"}>Open</MenuItem>
+          </Select>
+        </FormControl>
+         
+          <Button style={{width:170,backgroundColor:'#179600',marginTop:20,}} type="submit">Submit</Button>
       </form>
       <div></div>
       
@@ -79,4 +146,4 @@ render() {
 
     });
 
-export default connect(mapStateToProps)(Calendar);
+export default  withStyles(styles)(connect(mapStateToProps)(Calendar));

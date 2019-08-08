@@ -102,7 +102,7 @@ class CalendarItem extends Component {
           open={this.state.open}
           onClose={this.handleClose}
         >
-          <DialogTitle>Change your Date</DialogTitle>
+          <DialogTitle>Change Date</DialogTitle>
           <DialogContent>
             <form className={classes.container}>
             <TextField

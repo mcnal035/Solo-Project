@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function* fetchList () {
     try{
-        const response = yield axios.get('/api/schedule');
+        const response = yield axios.get(`/api/schedule`);
         console.log('in fetchList', response);
         yield put({type: 'SET_LIST', payload: response.data})
         console.log('response.data', response.data);
