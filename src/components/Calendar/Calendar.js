@@ -52,6 +52,7 @@ class Calendar extends Component {
     
     state = {
         labelWidth: 0,
+        
         newTripTime: {
             startDate: '', //new Date()
             endDate:  '',

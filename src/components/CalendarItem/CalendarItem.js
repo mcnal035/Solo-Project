@@ -149,6 +149,7 @@ class CalendarItem extends Component {
                     <TableCell>{this.props.item.username} <br/></TableCell> 
                     <TableCell>Start: {this.props.item.start_date.substring(5, 7)+ "/" + this.props.item.start_date.substring(8,10)+ "/" + this.props.item.start_date.substring(0,4)}<br/></TableCell>
                     <TableCell>End: {this.props.item.end_date.substring(5, 7)+ "/" + this.props.item.end_date.substring(8,10)+ "/" + this.props.item.end_date.substring(0,4)} <br/></TableCell>
+                    <TableCell>Reserved: {this.props.item.open_closed}</TableCell>
                     <TableCell>{this.checkId(this.props.item)}</TableCell>
                 </TableRow>
         

@@ -3,12 +3,9 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-/**
- * GET route template
- */
-
+//GET route for all dates.
 router.get('/', rejectUnauthenticated, (req, res) => {
-    console.log(req.user)
+    //console.log(req.user)
     // return all times
     const queryText = `SELECT "user"."username", "schedule"."start_date", "schedule"."end_date", "schedule"."open_closed", "user"."id","schedule"."user_id", "schedule"."id" 
     from "user"
@@ -17,17 +14,39 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     pool.query(queryText)
         .then( (result) => {
             res.send(result.rows);
-            console.log('result rows', result.rows )
+           // console.log('result rows', result.rows )
         })
         .catch( (error) => {
-            console.log(`Error on query ${error}`);
+             console.log(`Error on query ${error}`);
             res.sendStatus(500);
         });
 });
 
+// router to filter the dates on the page to only show the month selected.
+router.get('/change',  (req, res) => {
+    console.log('req.query', req.query);
+    // return all times
+    const queryText = `SELECT *
+    FROM schedule
+    WHERE date_part('month', start_date) = $1;`;
+   const values = [req.query.filter]
+    pool.query(queryText, values)
+        .then( (result) => {
+            res.send(result.rows);
+            console.log('result rows', result.rows )
+        })
+        .catch( (error) => {
+            console.log(`Error on get filter ${error}`);
+            res.sendStatus(500);
+        });
+});
+
+
+
+
 // posts scheduled dates to the database.
 router.post('/', (req,res) => {
-    console.log('req.user', req.user)
+   // console.log('req.user', req.user)
     const newTripTimes = req.body;
     const queryText = `INSERT INTO "schedule" ("start_date", "end_date", "user_id", "open_closed")
     VALUES ($1, $2, $3, $4);`;
@@ -49,9 +68,9 @@ router.post('/', (req,res) => {
 
 
 router.put('/:id', (req,res)=>{
-    console.log('req.params.id', req.params.id);
-    console.log('req.body', req.body);
-    console.log('req.user.id', req.user.id);
+    // console.log('req.params.id', req.params.id);
+    // console.log('req.body', req.body);
+    // console.log('req.user.id', req.user.id);
     const idToUpdate = req.params.id;
     const date = req.body;
     const sqlText = `UPDATE schedule SET start_date=$1, end_date=$2 WHERE user_id=$3 AND id = $4;`;
