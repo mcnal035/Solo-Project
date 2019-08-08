@@ -108,7 +108,7 @@ render() {
                   }}
                 /> 
       <br/> 
-         <FormControl className={classes.formControl}>
+         <FormControl className={classes.textField}>
           <InputLabel htmlFor="age-simple">Open/Reserved</InputLabel>
           <Select
             value={this.state.newTripTime.reserve}
