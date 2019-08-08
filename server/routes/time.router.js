@@ -24,12 +24,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // router to filter the dates on the page to only show the month selected.
 router.get('/change',  (req, res) => {
-    console.log('req.query', req.query);
+    console.log('req.query.year', req.query.year);
+    console.log('req.query.month', req.query.month);
     // return all times
     const queryText = `SELECT *
     FROM schedule
-    WHERE date_part('month', start_date) = $1;`;
-   const values = [req.query.filter]
+    WHERE date_part('month', start_date) = $1 AND date_part('year', start_date) = $2;`;
+   const values = [req.query.month, req.query.year]
     pool.query(queryText, values)
         .then( (result) => {
             res.send(result.rows);

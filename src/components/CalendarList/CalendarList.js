@@ -10,11 +10,11 @@ import Table from '@material-ui/core/Table';
 
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import ReactDOM from 'react-dom';
+
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
-
+import TextField from '@material-ui/core/TextField';
 const styles = theme => ({
     list: {
       width: 250,
@@ -34,22 +34,25 @@ const styles = theme => ({
 class CalendarList extends Component {
 
   state = {
-
+    filterDate:{
+    year: 'yyyy',
     month: "",
-
+    }
   }
 
 
   handleChange = (event, propertyToChange) => {
-    console.log('event.target.value', event.target.value);
+     console.log('event.target.value', event.target.value);
     this.setState({
-       ...this.state.month,
+      filterDate:{
+       ...this.state.filterDate,
       [propertyToChange]: event.target.value,
+      }
     })
   }
   
   handleSubmit = () => {
-  this.props.dispatch({type:'EDIT_MONTH', payload: this.state.month})
+  this.props.dispatch({type:'EDIT_MONTH', payload: this.state.filterDate})
     console.log('clicked submit filter');
   }
 
@@ -57,47 +60,59 @@ class CalendarList extends Component {
     render (){
      
       const { classes } = this.props;
+      
         return(
             <>
           <div>  
-          <FormControl className={classes.formControl}>
+        <FormControl className={classes.formControl}>
           <InputLabel htmlFor="age-simple">Filter Month</InputLabel>
-          <Select
-           value={this.state.month}
-            onChange={(event) => this.handleChange(event, 'month')}
-            inputProps={{
-              name: 'none',
-            }}
-          >
-            <MenuItem value={"0"}><em>None</em></MenuItem>
-            <MenuItem value={"01"}>Jan</MenuItem>
-            <MenuItem value={"02"}>Feb</MenuItem>
-            <MenuItem value={"03"}>March</MenuItem>
-            <MenuItem value={"04"}>April</MenuItem>
-            <MenuItem value={"05"}>May</MenuItem>
-            <MenuItem value={"06"}>June</MenuItem>
-            <MenuItem value={"07"}>July</MenuItem>
-            <MenuItem value={"08"}>August</MenuItem>
-            <MenuItem value={"09"}>September</MenuItem>
-            <MenuItem value={"10"}>October</MenuItem>
-            <MenuItem value={"11"}>November</MenuItem>
-            <MenuItem value={"12"}>December</MenuItem>
-            
-          </Select>
-        </FormControl>
-            <Button onClick={() => this.handleSubmit()}>Filter</Button>
+              <Select
+                className={classes.textField}
+                value={this.state.filterDate.month}
+                onChange={(event) => this.handleChange(event, 'month')}
+                inputProps={{
+                  name: 'none',
+                }}
+              >
+                <MenuItem value={"0"}><em>None</em></MenuItem>
+                <MenuItem value={"01"}>Jan</MenuItem>
+                <MenuItem value={"02"}>Feb</MenuItem>
+                <MenuItem value={"03"}>March</MenuItem>
+                <MenuItem value={"04"}>April</MenuItem>
+                <MenuItem value={"05"}>May</MenuItem>
+                <MenuItem value={"06"}>June</MenuItem>
+                <MenuItem value={"07"}>July</MenuItem>
+                <MenuItem value={"08"}>August</MenuItem>
+                <MenuItem value={"09"}>September</MenuItem>
+                <MenuItem value={"10"}>October</MenuItem>
+                <MenuItem value={"11"}>November</MenuItem>
+                <MenuItem value={"12"}>December</MenuItem>
+                
+              </Select>
+      </FormControl>
+            <TextField
+              id="standard-name"
+              label="Year"
+              type="text"
+              className={classes.textField}
+              value={this.state.filterDate.year}
+              onChange={(event) => this.handleChange(event, 'year')}
+              margin="normal"
+            />
+          <Button onClick={() => this.handleSubmit()}>Filter</Button>
         </div>   
              <h2>Calendar Dates</h2> 
-             <Table>
-             <TableHead>
+        <Table>
+          <TableHead>
             <TableRow>
                 <TableCell>Users</TableCell>
                 <TableCell>Start Date</TableCell>
                 <TableCell>End Date</TableCell>
+                <TableCell>Reserved</TableCell>
                 <TableCell>Change Dates</TableCell>
             </TableRow>
           </TableHead>  
-          </Table> 
+        </Table> 
                 {this.props.reduxStore.getTrip.map(item => 
                 <CalendarItem  key={item.id} item={item}/>)}
             
