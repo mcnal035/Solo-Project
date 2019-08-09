@@ -24,26 +24,26 @@ const styles = theme => ({
   });
 
 class GuestBookList extends Component {
-    state = {
+    // state = {
       
-       log: '',
+    //    log: '',
         
-      };
+    //   };
     
 
-      handleChange = (event, propToChange) => {
-          console.log('event target', event.target.value)
-        this.setState({
-            ...this.state,
-          [propToChange]: event.target.value,
-        });
-      };
+    //   handleChange = (event, propToChange) => {
+    //       console.log('event target', event.target.value)
+    //     this.setState({
+    //         ...this.state,
+    //       [propToChange]: event.target.value,
+    //     });
+    //   };
 
-      handleSubmit = (event) => { 
-          event.preventDefault();
-          console.log('clicked submit', this.state.log);
+    //   handleSubmit = (event) => { 
+    //       event.preventDefault();
+    //       console.log('clicked submit', this.state.log);
           
-      }
+    //   }
 
 
 
@@ -51,10 +51,13 @@ class GuestBookList extends Component {
         const { classes } = this.props;
         return(
             <>
-            <h1>Guest List</h1>
-            {this.props.item.username}
-            {this.props.item.text}
-            {this.props.item.date_stamp}
+            
+           <li> {this.props.item.username}<span><br /></span>{this.props.item.date_stamp.substring(5, 7)+ "/" +this.props.item.date_stamp.substring(8,10)+ "/" + this.props.item.date_stamp.substring(0,4)}
+           
+           
+           <br />
+            {this.props.item.text} 
+            </li>
             </>
         )
     }
@@ -62,11 +65,9 @@ class GuestBookList extends Component {
 
 
 }
-const mapStateToProps = reduxStore =>({
-    reduxStore,
-   
-
-});
+const mapReduxStoreToProps = reduxStore => ({
+    reduxStore
+})
 
 
-export default withStyles(styles)((GuestBookList));;
+export default  withStyles(styles)(connect(mapReduxStoreToProps)(GuestBookList));

@@ -81,6 +81,7 @@ render() {
     <>
         
         {this.state.reduxStore}
+        <h2 align="center">Calendar</h2> 
       <form onSubmit={this.handleSubmit} className={classes.root} autoComplete="off">
           
         <TextField

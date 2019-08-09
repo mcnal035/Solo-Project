@@ -116,7 +116,7 @@ class CalendarList extends Component {
             />
           <Button style={{width:170,backgroundColor:'#179600',marginTop:20,}} onClick={() => this.handleSubmit()}>Filter</Button>
         </div>   
-             <h2>Calendar Dates</h2> 
+             <h2 align="center">Calendar Dates</h2> 
         <Table className={classes.table}>
           <TableHead>
             <TableRow component="th" scope="row">

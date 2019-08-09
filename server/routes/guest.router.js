@@ -14,7 +14,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     pool.query(queryText)
         .then( (result) => {
             res.send(result.rows);
-         console.log('result rows', result.rows )
+        // console.log('result rows', result.rows )
         })
         .catch( (error) => {
              console.log(`Error on query ${error}`);
@@ -22,5 +22,23 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         });
 });
 
+
+
+router.post('/', (req,res) => {
+     console.log('req.body', req.body)
+     const newTripTimes = req.body;
+     const queryText = `Insert INTO guest_log ("text", "user_id", "date_stamp") 
+     VALUES ($1, $2, NOW());`;
+     const queryValues = [
+         newTripTimes.log,
+         req.user.id,
+     ];
+     pool.query(queryText, queryValues)
+     .then(() => { res.sendStatus(201); })
+     .catch((err) => {
+       console.log('Error completing POST Dates', err);
+       res.sendStatus(500);
+     });
+ });
 
 module.exports = router;

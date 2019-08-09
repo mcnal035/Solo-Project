@@ -9,6 +9,7 @@ import editSaga from './editSaga'
 import deleteSaga from './deleteSaga';
 import filterSaga from './filterSaga';
 import guestBookSaga from './guestBookSaga';
+import guestBookPostSaga from './guestBookPostSaga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -23,7 +24,8 @@ export default function* rootSaga() {
   yield takeEvery('EDIT_ITEM', editSaga);
   yield takeEvery('DELETE_ITEM', deleteSaga);
   yield takeEvery('EDIT_MONTH', filterSaga);
-  yield takeEvery('FETCH_BOOK', guestBookSaga)
+  yield takeEvery('FETCH_BOOK', guestBookSaga);
+  yield takeEvery('POST_LOG', guestBookPostSaga)
   yield all([
     loginSaga(),
     registrationSaga(),

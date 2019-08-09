@@ -26,8 +26,9 @@ const styles = theme => ({
 
 class GuestBook extends Component {
     state = {
-      
+      newLog:{
        log: '',
+      }
         
       };
 
@@ -36,16 +37,19 @@ class GuestBook extends Component {
     }
 
       handleChange = (event, propToChange) => {
-          console.log('event target', event.target.value)
+           console.log('event target', event.target.value)
         this.setState({
-            ...this.state,
+            newLog:{
+            ...this.state.newLog,
           [propToChange]: event.target.value,
+            }
         });
       };
 
       handleSubmit = (event) => { 
           event.preventDefault();
-          console.log('clicked submit');
+        //   console.log('clicked submit',  this.state.log);
+          this.props.dispatch({type:'POST_LOG', payload: this.state.newLog});
       }
 
 
@@ -56,28 +60,16 @@ class GuestBook extends Component {
             <>
             <h1>Guest Book</h1>
             <form className={classes.container} onSubmit={this.handleSubmit}>
-            <textarea rows="10" cols="80"
-                onChange={(event) => this.handleChange(event, 'name')}></textarea>
+            <textarea rows="10" cols="80" maxLength="999"
+                onChange={(event) => this.handleChange(event, 'log')}></textarea>
 
-
-        <TextField style={{width:170, height:100}}
-          id="outlined-multiline-flexible"
-          label="Multiline"
-          multiline
-          rowsMax="4"
-          value={this.state.multiline}
-          onChange={(event) => this.handleChange(event, 'name')}
-          className={classes.textField}
-          margin="normal"
-          helperText="Share your trip"
-          variant="outlined"
-        />
-             <Button style={{width:170,backgroundColor:'#179600',marginTop:20,}} type="submit">Submit</Button>
+             <Button style={{width:80,backgroundColor:'#179600',marginTop:20,}} type="submit">Submit</Button>
             </form>
-
+            <h1>Guest List</h1>
+            <ul>
         {this.props.reduxStore.guestBookReducer.map(item => 
             <GuestBookList  key={item.id} item={item}/>)}
-            
+            </ul>
             </>
         )
     }
