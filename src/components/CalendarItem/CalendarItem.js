@@ -32,6 +32,15 @@ const styles = theme => ({
       width: 400,
 
     },
+    root: {
+      width: '100%',
+      marginTop: theme.spacing.unit * 3,
+      overflowX: 'auto',
+    },
+    table: {
+      minWidth: 700,
+    },
+  
   });
 
 class CalendarItem extends Component {
@@ -65,7 +74,7 @@ class CalendarItem extends Component {
       checkId = (item) =>{
         if(this.props.item.user_id === this.props.reduxStore.user.id){
            return(<>
-           <Button onClick={this.handleClickOpen}>Edit</Button></>)
+           <Button  style={{width:20,backgroundColor:'#179600',marginTop:20,}} onClick={this.handleClickOpen}>Edit</Button></>)
         }
     } 
 
@@ -142,13 +151,13 @@ class CalendarItem extends Component {
           </DialogActions>
         </Dialog>
       </div>
-      <Table>
-                <TableRow>
-                    <TableCell>{this.props.item.username} <br/></TableCell> 
-                    <TableCell>Start: {this.props.item.start_date.substring(5, 7)+ "/" + this.props.item.start_date.substring(8,10)+ "/" + this.props.item.start_date.substring(0,4)}<br/></TableCell>
-                    <TableCell>End: {this.props.item.end_date.substring(5, 7)+ "/" + this.props.item.end_date.substring(8,10)+ "/" + this.props.item.end_date.substring(0,4)} <br/></TableCell>
-                    <TableCell>Reserved: {this.props.item.open_closed}</TableCell>
-                    <TableCell>{this.checkId(this.props.item)}</TableCell>
+      <Table className={classes.root}>
+                <TableRow align="center">
+                    <TableCell className='tableCell'>{this.props.item.username}</TableCell> 
+                    <TableCell className='tableCell'>{this.props.item.start_date.substring(5, 7)+ "/" + this.props.item.start_date.substring(8,10)+ "/" + this.props.item.start_date.substring(0,4)}</TableCell>
+                    <TableCell className='tableCell'>{this.props.item.end_date.substring(5, 7)+ "/" + this.props.item.end_date.substring(8,10)+ "/" + this.props.item.end_date.substring(0,4)}</TableCell>
+                    <TableCell className='tableCell'>{this.props.item.open_closed}</TableCell>
+                    <TableCell className='tableCell'>{this.checkId(this.props.item)}</TableCell>
                 </TableRow>
         
       </Table>

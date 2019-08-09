@@ -1,9 +1,6 @@
 
 
-.hidden{
-    display: none;
+.MuiTableCell-root{
+    padding: 10px 10px 14px 16px;
 }
 
-/* #date{
-    width: 20px;
-} */

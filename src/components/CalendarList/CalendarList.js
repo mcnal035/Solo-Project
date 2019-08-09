@@ -25,8 +25,20 @@ const styles = theme => ({
     textField: {
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
-      width: 400,
+      width: 200,
     },
+    formControl: {
+      margin: theme.spacing.unit,
+    },
+    root: {
+      width: '100%',
+      marginTop: theme.spacing.unit * 3,
+      overflowX: 'auto',
+    },
+    table: {
+      minWidth: 700,
+    },
+   
   });
 
 
@@ -35,7 +47,7 @@ class CalendarList extends Component {
 
   state = {
     filterDate:{
-    year: 'yyyy',
+    year: '',
     month: "",
     }
   }
@@ -94,22 +106,25 @@ class CalendarList extends Component {
               id="standard-name"
               label="Year"
               type="text"
+              inputProps={{
+                maxLength: 4
+              }}
               className={classes.textField}
               value={this.state.filterDate.year}
               onChange={(event) => this.handleChange(event, 'year')}
               margin="normal"
             />
-          <Button onClick={() => this.handleSubmit()}>Filter</Button>
+          <Button style={{width:170,backgroundColor:'#179600',marginTop:20,}} onClick={() => this.handleSubmit()}>Filter</Button>
         </div>   
              <h2>Calendar Dates</h2> 
-        <Table>
+        <Table className={classes.table}>
           <TableHead>
-            <TableRow>
-                <TableCell>Users</TableCell>
-                <TableCell>Start Date</TableCell>
-                <TableCell>End Date</TableCell>
-                <TableCell>Reserved</TableCell>
-                <TableCell>Change Dates</TableCell>
+            <TableRow component="th" scope="row">
+                <TableCell align="left">User</TableCell>
+                <TableCell align="left">Start Date</TableCell>
+                <TableCell align="left">End Date</TableCell>
+                <TableCell align="left">Reserved</TableCell>
+                <TableCell align="left">Change Dates</TableCell>
             </TableRow>
           </TableHead>  
         </Table> 
