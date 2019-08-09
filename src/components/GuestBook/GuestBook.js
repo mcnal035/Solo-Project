@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import GuestBookList from '../GuestBookList/GuestBookList';
 
 
 const styles = theme => ({
@@ -30,6 +31,10 @@ class GuestBook extends Component {
         
       };
 
+      componentDidMount(){
+        this.props.dispatch({type:'FETCH_BOOK'});
+    }
+
       handleChange = (event, propToChange) => {
           console.log('event target', event.target.value)
         this.setState({
@@ -51,8 +56,11 @@ class GuestBook extends Component {
             <>
             <h1>Guest Book</h1>
             <form className={classes.container} onSubmit={this.handleSubmit}>
+            <textarea rows="10" cols="80"
+                onChange={(event) => this.handleChange(event, 'name')}></textarea>
 
-        <TextField
+
+        <TextField style={{width:170, height:100}}
           id="outlined-multiline-flexible"
           label="Multiline"
           multiline
@@ -66,6 +74,10 @@ class GuestBook extends Component {
         />
              <Button style={{width:170,backgroundColor:'#179600',marginTop:20,}} type="submit">Submit</Button>
             </form>
+
+        {this.props.reduxStore.guestBookReducer.map(item => 
+            <GuestBookList  key={item.id} item={item}/>)}
+            
             </>
         )
     }
@@ -74,4 +86,12 @@ class GuestBook extends Component {
 
 }
 
-export default withStyles(styles)((GuestBook));;
+
+const mapStateToProps = reduxStore =>({
+    reduxStore,
+   
+
+});
+
+
+export default withStyles(styles)(connect(mapStateToProps)(GuestBook));
