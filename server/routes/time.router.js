@@ -24,8 +24,8 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // router to filter the dates on the page to only show the month selected.
 router.get('/change',  (req, res) => {
-    console.log('req.query.year', req.query.year);
-    console.log('req.query.month', req.query.month);
+   // console.log('req.query.year', req.query.year);
+   // console.log('req.query.month', req.query.month);
     // return all times
     const queryText = `SELECT *
     FROM schedule

@@ -5,9 +5,9 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 
 router.get('/', rejectUnauthenticated, (req, res) => {
-    //console.log(req.user)
+    //console.log('req.body', req.body)
     // return all logs
-    const queryText = `SELECT "user"."username","guest_log"."id", "guest_log"."text", "guest_log"."date_stamp"
+    const queryText = `SELECT "user"."username","guest_log"."user_id", "guest_log"."text", "guest_log"."date_stamp", "guest_log"."id"
     FROM "guest_log"
     JOIN "user" ON "user"."id" = "guest_log"."user_id"
     ORDER BY "date_stamp";`;
@@ -25,7 +25,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 
 router.post('/', (req,res) => {
-     console.log('req.body', req.body)
+     //console.log('req.body', req.body)
      const newTripTimes = req.body;
      const queryText = `Insert INTO guest_log ("text", "user_id", "date_stamp") 
      VALUES ($1, $2, NOW());`;
@@ -40,5 +40,21 @@ router.post('/', (req,res) => {
        res.sendStatus(500);
      });
  });
+
+ router.delete('/:id',rejectUnauthenticated, (req, res) => {
+     console.log('in Delete router for guest.', req.params.id);
+     const idToDelete = req.params.id;
+     const sqlText = `DELETE FROM guest_log WHERE id=$1 AND user_id=$2;`;
+     pool.query(sqlText, [idToDelete, req.user.id])
+         .then(response => {
+             res.sendStatus(200);
+         })
+         .catch(error => {
+             console.log('error in DELETE', error);
+             res.sendStatus(500);
+         })
+ })
+
+
 
 module.exports = router;

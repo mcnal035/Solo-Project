@@ -2,7 +2,7 @@ import {connect} from 'react-redux';
 import React, {Component} from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
-import TextField from '@material-ui/core/TextField';
+
 import Button from '@material-ui/core/Button';
 import GuestBookList from '../GuestBookList/GuestBookList';
 
@@ -51,6 +51,7 @@ class GuestBook extends Component {
         //   console.log('clicked submit',  this.state.log);
           this.props.dispatch({type:'POST_LOG', payload: this.state.newLog});
       }
+      
 
 
 
@@ -58,17 +59,18 @@ class GuestBook extends Component {
         const { classes } = this.props;
         return(
             <>
+            {JSON.stringify(this.state)}
+            <form  onSubmit={this.handleSubmit}>
             <h1>Guest Book</h1>
-            <form className={classes.container} onSubmit={this.handleSubmit}>
             <textarea rows="10" cols="80" maxLength="999"
                 onChange={(event) => this.handleChange(event, 'log')}></textarea>
 
-             <Button style={{width:80,backgroundColor:'#179600',marginTop:20,}} type="submit">Submit</Button>
+             <Button style={{width:50,backgroundColor:'#179600',marginTop:10,}} type="submit">Submit</Button>
             </form>
             <h1>Guest List</h1>
             <ul>
         {this.props.reduxStore.guestBookReducer.map(item => 
-            <GuestBookList  key={item.id} item={item}/>)}
+            <GuestBookList  key={item.id} item={item} />)}
             </ul>
             </>
         )
