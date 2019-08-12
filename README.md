@@ -1,13 +1,6 @@
-# Prime Project
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+#  Project Arranmore
+Arranmore is designed to give a select amount of users who own the vacation home access to schedule planned times for their vacation home.  It lets them add trips to the schedule and will let them create, read, update, or delete them. It will also allow them to update users on news and recent events.  
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
-
-## Download (Don't Clone) This Repository
-
-* Don't Fork or Clone. Instead, click the `Clone or Download` button and select `Download Zip`.
-* Unzip the project and start with the code in that folder.
-* Create a new GitHub project and push this code to the new repository.
 
 ## Prerequisites
 
@@ -16,6 +9,13 @@ Before you get started, make sure you have the following software installed on y
 - [Node.js](https://nodejs.org/en/)
 - [PostrgeSQL](https://www.postgresql.org/)
 - [Nodemon](https://nodemon.io/)
+```
+--Run npm install or yarn install to down load dependencies.
+```
+## Installing
+This version uses React, Redux, Node, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+.
+
 
 ## Create database and table
 
