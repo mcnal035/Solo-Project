@@ -29,6 +29,7 @@ const styles = theme => ({
     },
     formControl: {
       margin: theme.spacing.unit,
+      display: 'flex',
     },
     root: {
       width: '100%',
@@ -37,6 +38,11 @@ const styles = theme => ({
     },
     table: {
       minWidth: 700,
+    },
+    container: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      width: '20%',
     },
    
   });
@@ -101,7 +107,7 @@ class CalendarList extends Component {
                 <MenuItem value={"12"}>December</MenuItem>
                 
               </Select>
-      </FormControl>
+      
             <TextField
               id="standard-name"
               label="Year"
@@ -115,6 +121,7 @@ class CalendarList extends Component {
               margin="normal"
             />
           <Button style={{width:170,backgroundColor:'#179600',marginTop:20,}} onClick={() => this.handleSubmit()}>Filter</Button>
+          </FormControl>
         </div>   
              <h2 align="center">Calendar Dates</h2> 
         <Table className={classes.table}>

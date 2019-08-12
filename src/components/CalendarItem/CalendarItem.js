@@ -21,6 +21,7 @@ const styles = theme => ({
     container: {
       display: 'flex',
       flexWrap: 'wrap',
+      width: '20%',
     },
     formControl: {
       margin: theme.spacing.unit,
@@ -40,6 +41,11 @@ const styles = theme => ({
     table: {
       minWidth: 700,
     },
+    tableCell: {
+      width: '20%',
+      padding: 'auto',
+      marginLeft: theme.spacing.unit,
+    }
   
   });
 
@@ -153,11 +159,11 @@ class CalendarItem extends Component {
       </div>
       <Table className={classes.root}>
                 <TableRow align="center">
-                    <TableCell className='tableCell'>{this.props.item.username}</TableCell> 
-                    <TableCell className='tableCell'>{this.props.item.start_date.substring(5, 7)+ "/" + this.props.item.start_date.substring(8,10)+ "/" + this.props.item.start_date.substring(0,4)}</TableCell>
-                    <TableCell className='tableCell'>{this.props.item.end_date.substring(5, 7)+ "/" + this.props.item.end_date.substring(8,10)+ "/" + this.props.item.end_date.substring(0,4)}</TableCell>
-                    <TableCell className='tableCell'>{this.props.item.open_closed}</TableCell>
-                    <TableCell className='tableCell'>{this.checkId(this.props.item)}</TableCell>
+                    <TableCell className={classes.tableCell}>{this.props.item.username}</TableCell> 
+                    <TableCell className={classes.tableCell}>{this.props.item.start_date.substring(5, 7)+ "/" + this.props.item.start_date.substring(8,10)+ "/" + this.props.item.start_date.substring(0,4)}</TableCell>
+                    <TableCell className={classes.tableCell}>{this.props.item.end_date.substring(5, 7)+ "/" + this.props.item.end_date.substring(8,10)+ "/" + this.props.item.end_date.substring(0,4)}</TableCell>
+                    <TableCell className={classes.tableCell}>{this.props.item.open_closed}</TableCell>
+                    <TableCell className={classes.tableCell}>{this.checkId(this.props.item)}&nbsp;</TableCell>
                 </TableRow>
         
       </Table>
