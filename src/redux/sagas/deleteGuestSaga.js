@@ -3,7 +3,7 @@ import axios from 'axios';
 
 
 function* deleteGuestSaga(action) {
-    console.log('action.payload', action.payload);
+    // console.log('action.payload', action.payload);
     try{
         yield axios.delete(`/api/guest_log/${action.payload}`)
         yield put({type:'FETCH_BOOK'})
