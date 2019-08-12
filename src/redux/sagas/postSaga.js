@@ -8,6 +8,7 @@ function* postList (action) {
       console.log(response.data);
       yield put({ type: 'FETCH_LIST'});
     } catch (error) {
+      alert('You must submit with dates')
       console.log('error', error);
     }
   }

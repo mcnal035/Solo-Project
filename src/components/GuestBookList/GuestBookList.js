@@ -64,12 +64,12 @@ class GuestBookList extends Component {
        
         return(
             <> 
-             {JSON.stringify(this.state)}
-           <li> {this.props.item.username}<span><br /></span>{this.props.item.date_stamp.substring(5, 7)+ "/" +this.props.item.date_stamp.substring(8,10)+ "/" + this.props.item.date_stamp.substring(0,4)}
+             {/* {JSON.stringify(this.state)} */}
+           <div> {this.props.item.username}<span><br /></span>{this.props.item.date_stamp.substring(5, 7)+ "/" +this.props.item.date_stamp.substring(8,10)+ "/" + this.props.item.date_stamp.substring(0,4)}
            
            <br />
             {this.props.item.text} {this.checkId(this.props.item)}
-            </li>
+            </div>
             </>
         );
     }

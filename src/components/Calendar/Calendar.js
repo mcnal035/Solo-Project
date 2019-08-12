@@ -70,11 +70,22 @@ class Calendar extends Component {
         });
     }
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        this.props.dispatch({type:'ADD_DATE', payload: this.state.newTripTime}); // need to create a post to DB. 
+    handleSubmit = (event, i) => {
+      console.log('get Trip', this.props.reduxStore.getTrip )
+      console.log('')
+      
+      
+      for (let i = 0; i < this.props.reduxStore.getTrip.length; i++) {
+        if ( this.state.newTripTime.startDate >=  this.props.reduxStore.getTrip[i].start_date &&  this.state.newTripTime.endDate <=  this.props.reduxStore.getTrip[i].end_date ||
+          this.props.reduxStore.getTrip[i].start_date >= this.state.newTripTime.startDate && this.props.reduxStore.getTrip[i].end_date <= this.state.newTripTime.endDate){
+            alert('pick different date.');
+            return 'good';
     }
-
+  
+      }    
+        this.props.dispatch({type:'ADD_DATE', payload: this.state.newTripTime}); // need to create a post to DB. 
+    
+  }
 render() {
     const { classes } = this.props;
   return (

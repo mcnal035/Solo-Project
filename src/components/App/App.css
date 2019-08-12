@@ -10,8 +10,8 @@ body {
 
 form {
     background-color: #77a29a;
-    width: 30%;
-    height: 250px;
+    width: 50%;
+    height: auto;
     margin: 20px auto;
     padding: 25px;
     border-radius: 2px;
