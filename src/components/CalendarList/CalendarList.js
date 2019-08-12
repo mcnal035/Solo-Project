@@ -23,9 +23,12 @@ const styles = theme => ({
       width: 'auto',
     },
     textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
+      textAlign: 'center',
+      marginLeft: 'auto',
+      marginRight: 'auto',
       width: 200,
+      overFlow: "auto",
+
     },
     formControl: {
       margin: theme.spacing.unit,
@@ -37,12 +40,24 @@ const styles = theme => ({
       overflowX: 'auto',
     },
     table: {
-      minWidth: 700,
+      minWidth:   'auto',
+    },
+    tableCell: {
+      width: '20%',
+      padding: 'auto',
+      marginLeft: theme.spacing.unit,
     },
     container: {
       display: 'flex',
       flexWrap: 'wrap',
       width: '20%',
+    },
+    button:{
+      width:170,
+      backgroundColor:'#179600',
+      textAlign: 'center',
+      marginLeft: 'auto',
+      marginRight: 'auto',
     },
    
   });
@@ -83,7 +98,8 @@ class CalendarList extends Component {
             <>
           <div>  
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="age-simple">Filter Month</InputLabel>
+          <h3  className={classes.textField}>Select A Month</h3>
+          {/* <InputLabel htmlFor="age-simple">Filter Month</InputLabel> */}
               <Select
                 className={classes.textField}
                 value={this.state.filterDate.month}
@@ -120,18 +136,18 @@ class CalendarList extends Component {
               onChange={(event) => this.handleChange(event, 'year')}
               margin="normal"
             />
-          <Button style={{width:170,backgroundColor:'#179600',marginTop:20,}} onClick={() => this.handleSubmit()}>Filter</Button>
+          <Button className={classes.button} onClick={() => this.handleSubmit()}>Filter</Button>
           </FormControl>
         </div>   
              <h2 align="center">Calendar Dates</h2> 
         <Table className={classes.table}>
           <TableHead>
             <TableRow component="th" scope="row">
-                <TableCell align="left">User</TableCell>
-                <TableCell align="left">Start Date</TableCell>
-                <TableCell align="left">End Date</TableCell>
-                <TableCell align="left">Reserved</TableCell>
-                <TableCell align="left">Change Dates</TableCell>
+                <TableCell className={classes.tableCell}>User</TableCell>
+                <TableCell className={classes.tableCell}>Start Date</TableCell>
+                <TableCell className={classes.tableCell}>End Date</TableCell>
+                <TableCell className={classes.tableCell}>Reserved</TableCell>
+                <TableCell className={classes.tableCell}>Change Dates</TableCell>
             </TableRow>
           </TableHead>  
         </Table> 

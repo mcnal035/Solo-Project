@@ -45,6 +45,11 @@ const styles = theme => ({
       width: '20%',
       padding: 'auto',
       marginLeft: theme.spacing.unit,
+    },
+    button:{
+      width:20,
+      backgroundColor:'#179600',
+      
     }
   
   });
@@ -78,9 +83,10 @@ class CalendarItem extends Component {
 
 
       checkId = (item) =>{
+        const { classes } = this.props;
         if(this.props.item.user_id === this.props.reduxStore.user.id){
            return(<>
-           <Button  style={{width:20,backgroundColor:'#179600',marginTop:20,}} onClick={this.handleClickOpen}>Edit</Button></>)
+           <Button  className={classes.button} onClick={this.handleClickOpen}>Edit</Button></>)
         }
     } 
 

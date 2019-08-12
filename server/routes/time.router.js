@@ -27,8 +27,9 @@ router.get('/change',  (req, res) => {
    // console.log('req.query.year', req.query.year);
    // console.log('req.query.month', req.query.month);
     // return all times
-    const queryText = `SELECT *
+    const queryText = `SELECT "user"."username", "schedule"."start_date", "schedule"."end_date", "schedule"."open_closed", "user"."id","schedule"."user_id", "schedule"."id" 
     FROM schedule
+    JOIN "user" ON "schedule"."user_id" = "user"."id"
     WHERE date_part('month', start_date) = $1 AND date_part('year', start_date) = $2;`;
    const values = [req.query.month, req.query.year]
     pool.query(queryText, values)

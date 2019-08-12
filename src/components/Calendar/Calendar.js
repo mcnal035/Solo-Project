@@ -51,7 +51,7 @@ class Calendar extends Component {
         newTripTime: {
             startDate: '', //new Date()
             endDate:  '',
-            reserve: 'none', // this will need to change to a reservation time. Then bring in the props for the user name to show on the map.
+            reserve: 'None', // this will need to change to a reservation time. Then bring in the props for the user name to show on the map.
         }
     }
     //Fetch precreated DB List
@@ -130,8 +130,8 @@ render() {
             }}
           >
             <MenuItem value=""><em>None</em></MenuItem>
-            <MenuItem value={"reserved"}>Reserved</MenuItem>
-            <MenuItem value={"open"}>Open</MenuItem>
+            <MenuItem value={"Reserved"}>Reserved</MenuItem>
+            <MenuItem value={"Open"}>Open</MenuItem>
           </Select>
         </FormControl>
          
