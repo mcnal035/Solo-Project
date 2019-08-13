@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
 
+
 const styles = theme => ({
     container: {
       display: 'flex',
@@ -19,6 +20,25 @@ const styles = theme => ({
     menu: {
       width: 200,
     },
+    root: {
+      ...theme.mixins.gutters(),
+      paddingTop: theme.spacing.unit * 6,
+      paddingBottom: theme.spacing.unit * 6,
+      backgroundColor: 'lightblue',
+      textAlign: 'left',
+      marginTop: '12px',
+      marginBotton: '12px',
+      // marginLeft: '100px',
+      // marginRight: '600px',
+      width: '600px',
+      height: '400px',
+      overflow:'auto',
+    },
+  
+    divButton: {
+      textAlign: 'right',
+    }
+
   });
 
 class GuestBookList extends Component {
@@ -55,21 +75,27 @@ class GuestBookList extends Component {
     checkId = (item) =>{
       if(this.props.item.user_id === this.props.reduxStore.user.id){
          return(<>
-         <Button  style={{width:20,backgroundColor:'#179600',marginTop:20,}} onClick={this.handleDelete}>Delete</Button></>)
+         <div className={'divButton'}>
+         <Button  style={{width:10,margin:20,}} onClick={this.handleDelete}>Delete</Button>
+         </div>
+         </>)
       }
   } 
 
 
     render() {
-       
+      const { classes } = this.props;
         return(
             <> 
+            
              {/* {JSON.stringify(this.state)} */}
-           <div> {this.props.item.username}<span><br /></span>{this.props.item.date_stamp.substring(5, 7)+ "/" +this.props.item.date_stamp.substring(8,10)+ "/" + this.props.item.date_stamp.substring(0,4)}
+            
+           <div > {this.props.item.username}<span><br /></span>{this.props.item.date_stamp.substring(5, 7)+ "/" +this.props.item.date_stamp.substring(8,10)+ "/" + this.props.item.date_stamp.substring(0,4)}
            
            <br />
             {this.props.item.text} {this.checkId(this.props.item)}
             </div>
+            
             </>
         );
     }

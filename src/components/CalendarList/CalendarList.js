@@ -99,7 +99,7 @@ class CalendarList extends Component {
           <div>  
         <FormControl className={classes.formControl}>
           <h3  className={classes.textField}>Select A Month</h3>
-          {/* <InputLabel htmlFor="age-simple">Filter Month</InputLabel> */}
+          {/* <InputLabel className={classes.textField} htmlFor="age-simple">Filter Month</InputLabel> */}
               <Select
                 className={classes.textField}
                 value={this.state.filterDate.month}

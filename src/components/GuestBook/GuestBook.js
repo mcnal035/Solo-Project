@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
 import GuestBookList from '../GuestBookList/GuestBookList';
-
+import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
     container: {
@@ -18,6 +18,20 @@ const styles = theme => ({
     },
     dense: {
       marginTop: 16,
+    }, 
+    root: {
+      ...theme.mixins.gutters(),
+      paddingTop: theme.spacing.unit * 2,
+      paddingBottom: theme.spacing.unit * 2,
+      backgroundColor: 'lightblue',
+      textAlign: 'left',
+      marginTop: '1px',
+      marginBotton: '1px',
+      // marginLeft: '100px',
+      // marginRight: '600px',
+      width: '600px',
+      height: '110px',
+      overflow:'auto',
     },
     menu: {
       width: 200,
@@ -68,10 +82,10 @@ class GuestBook extends Component {
              <Button style={{width:50,backgroundColor:'#179600',marginTop:10,}} type="submit">Submit</Button>
             </form>
             <h1>Guest List</h1>
-            <ul>
+            <Paper className={classes.root} elevation={1}>
         {this.props.reduxStore.guestBookReducer.map(item => 
             <GuestBookList  key={item.id} item={item} />)}
-            </ul>
+            </Paper>
             </>
         )
     }
