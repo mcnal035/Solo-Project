@@ -1,6 +1,7 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
+    background-color: #E9FDF6;
 }
 
 .alert {
@@ -9,7 +10,7 @@ body {
 }
 
 form {
-    background-color: #77a29a;
+    background-color: #CFF8DB;
     width: 50%;
     height: auto;
     margin: 20px auto;

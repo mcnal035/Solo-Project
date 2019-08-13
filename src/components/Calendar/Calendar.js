@@ -16,7 +16,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import Swal from 'sweetalert2';
 
 const styles = theme => ({
     container: {
@@ -71,21 +71,33 @@ class Calendar extends Component {
     }
 
     handleSubmit = (event, i) => {
+      event.preventDefault();
       console.log('get Trip', this.props.reduxStore.getTrip )
       console.log('')
       
       
       for (let i = 0; i < this.props.reduxStore.getTrip.length; i++) {
-        if ( this.state.newTripTime.startDate >=  this.props.reduxStore.getTrip[i].start_date &&  this.state.newTripTime.endDate <=  this.props.reduxStore.getTrip[i].end_date ||
-          this.props.reduxStore.getTrip[i].start_date >= this.state.newTripTime.startDate && this.props.reduxStore.getTrip[i].end_date <= this.state.newTripTime.endDate){
-            alert('pick different date.');
+        if ( (this.state.newTripTime.startDate >=  this.props.reduxStore.getTrip[i].start_date &&  this.state.newTripTime.endDate <=  this.props.reduxStore.getTrip[i].end_date) ||
+          (this.props.reduxStore.getTrip[i].start_date >= this.state.newTripTime.startDate && this.props.reduxStore.getTrip[i].end_date <= this.state.newTripTime.endDate)){
+            Swal.fire({
+              type: 'error',
+              title: 'Pick a Different Day Dumb-Ass',
+              text: `Something went wrong becasue you're an idiot!`, 
+            });
             return 'good';
     }
-  
       }    
+      Swal.fire({
+        position: 'top-end',
+        type: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      })
         this.props.dispatch({type:'ADD_DATE', payload: this.state.newTripTime}); // need to create a post to DB. 
-    
   }
+
+
 render() {
     const { classes } = this.props;
   return (

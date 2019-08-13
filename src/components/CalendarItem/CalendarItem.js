@@ -21,7 +21,7 @@ const styles = theme => ({
     container: {
       display: 'flex',
       flexWrap: 'wrap',
-      width: '20%',
+      width: '40%',
     },
     formControl: {
       margin: theme.spacing.unit,
@@ -30,7 +30,7 @@ const styles = theme => ({
     textField: {
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
-      width: 400,
+      width: '600px',
 
     },
     root: {
@@ -114,7 +114,7 @@ class CalendarItem extends Component {
         return(
             
         <>
-        <div>
+        
         <Dialog
           disableBackdropClick
           disableEscapeKeyDown
@@ -151,8 +151,8 @@ class CalendarItem extends Component {
             </form>
           </DialogContent>
         <DialogActions>
-          <Button onClick={ () => this.handleDelete() } color="secondary">
-              DELETE DATE
+          <Button onClick={ () => this.handleDelete() } float="left" color="secondary">
+              Remove DATE
             </Button>
             <Button onClick={ this.handleClose } color="primary">
               Back
@@ -162,8 +162,8 @@ class CalendarItem extends Component {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
-      <Table className={classes.root}>
+      
+      {/* <Table className={classes.root}> */}
                 <TableRow align="center">
                     <TableCell className={classes.tableCell}>{this.props.item.username}</TableCell> 
                     <TableCell className={classes.tableCell}>{this.props.item.start_date.substring(5, 7)+ "/" + this.props.item.start_date.substring(8,10)+ "/" + this.props.item.start_date.substring(0,4)}</TableCell>
@@ -172,7 +172,7 @@ class CalendarItem extends Component {
                     <TableCell className={classes.tableCell}>{this.checkId(this.props.item)}&nbsp;</TableCell>
                 </TableRow>
         
-      </Table>
+      {/* </Table> */}
             
         </>
         )

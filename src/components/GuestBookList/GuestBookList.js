@@ -26,10 +26,10 @@ const styles = theme => ({
       paddingBottom: theme.spacing.unit * 6,
       backgroundColor: 'lightblue',
       textAlign: 'left',
-      marginTop: '12px',
-      marginBotton: '12px',
-      // marginLeft: '100px',
-      // marginRight: '600px',
+      marginTop: '20px',
+      // marginBottom: '12px',
+      marginLeft: '100px',
+      marginRight: '600px',
       width: '600px',
       height: '400px',
       overflow:'auto',
@@ -37,7 +37,16 @@ const styles = theme => ({
   
     divButton: {
       textAlign: 'right',
-    }
+
+    },
+    user:{
+      fontSize: '12px',
+    },
+    text:{
+      fontSize: '16px',
+      // marginTop: '12px',
+      marginBottom: '10px',
+    },
 
   });
 
@@ -76,7 +85,7 @@ class GuestBookList extends Component {
       if(this.props.item.user_id === this.props.reduxStore.user.id){
          return(<>
          <div className={'divButton'}>
-         <Button  style={{width:10,margin:20,}} onClick={this.handleDelete}>Delete</Button>
+         <Button  style={{width:25,margin:20, float: 'right', backgroundColor: '#E65B54', fontSize:'10px' }} onClick={this.handleDelete}>Remove</Button>
          </div>
          </>)
       }
@@ -90,10 +99,11 @@ class GuestBookList extends Component {
             
              {/* {JSON.stringify(this.state)} */}
             
-           <div > {this.props.item.username}<span><br /></span>{this.props.item.date_stamp.substring(5, 7)+ "/" +this.props.item.date_stamp.substring(8,10)+ "/" + this.props.item.date_stamp.substring(0,4)}
+           <div className={classes.user}> {this.props.item.username}{this.props.item.date_stamp.substring(5, 7)+ "/" +this.props.item.date_stamp.substring(8,10)+ "/" + this.props.item.date_stamp.substring(0,4)} </div>
            
-           <br />
-            {this.props.item.text} {this.checkId(this.props.item)}
+           <div className={classes.text}>
+           {this.checkId(this.props.item)} {this.props.item.text}
+            <br/>
             </div>
             
             </>

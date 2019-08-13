@@ -15,6 +15,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import TableBody from '@material-ui/core/TableBody';
+import Paper from '@material-ui/core/Paper';
+
 const styles = theme => ({
     list: {
       width: 250,
@@ -58,6 +61,14 @@ const styles = theme => ({
       textAlign: 'center',
       marginLeft: 'auto',
       marginRight: 'auto',
+    },
+    root: {
+      ...theme.mixins.gutters(),
+      paddingTop: theme.spacing.unit * 2,
+      paddingBottom: theme.spacing.unit * 2,
+      backgroundColor: 'lightblue',
+      textAlign: 'left',
+      overflow:'auto',
     },
    
   });
@@ -139,10 +150,12 @@ class CalendarList extends Component {
           <Button className={classes.button} onClick={() => this.handleSubmit()}>Filter</Button>
           </FormControl>
         </div>   
-             <h2 align="center">Calendar Dates</h2> 
+             
+      <Paper className={classes.root} elevation={1}>
+        <h2 float="left" style={{borderBottom:"2px solid" }}>Calendar Dates</h2> 
         <Table className={classes.table}>
           <TableHead>
-            <TableRow component="th" scope="row">
+            <TableRow component="tr" scope="row">
                 <TableCell className={classes.tableCell}>User</TableCell>
                 <TableCell className={classes.tableCell}>Start Date</TableCell>
                 <TableCell className={classes.tableCell}>End Date</TableCell>
@@ -150,10 +163,12 @@ class CalendarList extends Component {
                 <TableCell className={classes.tableCell}>Change Dates</TableCell>
             </TableRow>
           </TableHead>  
-        </Table> 
+              <TableBody>
                 {this.props.reduxStore.getTrip.map(item => 
                 <CalendarItem  key={item.id} item={item}/>)}
-            
+                </TableBody>
+            </Table> 
+      </Paper>
             </>
         )
     } 

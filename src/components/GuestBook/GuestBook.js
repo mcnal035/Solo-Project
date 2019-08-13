@@ -26,12 +26,18 @@ const styles = theme => ({
       backgroundColor: 'lightblue',
       textAlign: 'left',
       marginTop: '1px',
-      marginBotton: '1px',
-      // marginLeft: '100px',
-      // marginRight: '600px',
-      width: '600px',
-      height: '110px',
+      marginBottom: '1px',
+      marginLeft: '100px',
+       marginRight: '600px',
+      width: '800px',
+      height: '400px',
       overflow:'auto',
+    },
+    header: {
+      marginTop: '1px',
+      marginBottom: '1px',
+      marginLeft: '100px',
+      marginRight: '600px',
     },
     menu: {
       width: 200,
@@ -73,15 +79,15 @@ class GuestBook extends Component {
         const { classes } = this.props;
         return(
             <>
-            {JSON.stringify(this.state)}
+            {/* {JSON.stringify(this.state)} */}
             <form  onSubmit={this.handleSubmit}>
             <h1>Guest Book</h1>
-            <textarea rows="10" cols="80" maxLength="999"
+            <textarea rows="10" cols="80" maxLength="999" 
                 onChange={(event) => this.handleChange(event, 'log')}></textarea>
 
              <Button style={{width:50,backgroundColor:'#179600',marginTop:10,}} type="submit">Submit</Button>
             </form>
-            <h1>Guest List</h1>
+            <h1 className={classes.header}>Guest Entries</h1>
             <Paper className={classes.root} elevation={1}>
         {this.props.reduxStore.guestBookReducer.map(item => 
             <GuestBookList  key={item.id} item={item} />)}

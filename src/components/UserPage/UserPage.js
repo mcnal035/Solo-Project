@@ -13,6 +13,7 @@ const UserPage = (props) => (
       Welcome, { props.user.username }!
     </h1>
     <p>Your ID is: {props.user.id}</p>
+    <p>Use the navigation in the top right corner and slect Calendar to set a time to spend at the cabin. Use the Guest Book to let us know more about your experience.</p>
     <LogOutButton className="log-in" />
   </div>
 );
