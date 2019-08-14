@@ -11,7 +11,7 @@ import Table from '@material-ui/core/Table';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
-import InputLabel from '@material-ui/core/InputLabel';
+
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -37,11 +37,11 @@ const styles = theme => ({
       margin: theme.spacing.unit,
       display: 'flex',
     },
-    root: {
-      width: '100%',
-      marginTop: theme.spacing.unit * 3,
-      overflowX: 'auto',
-    },
+    // root: {
+    //   width: '100%',
+    //   marginTop: theme.spacing.unit * 3,
+    //   overflowX: 'auto',
+    // },
     table: {
       minWidth:   'auto',
     },

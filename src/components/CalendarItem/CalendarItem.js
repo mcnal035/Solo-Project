@@ -8,13 +8,14 @@ import { withStyles } from '@material-ui/core/styles';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import Table from '@material-ui/core/Table';
+
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
 import Swal from 'sweetalert2';
 
+import moment from 'moment';
 //Test Calendar
 
 // styles the component
@@ -62,10 +63,8 @@ class CalendarItem extends Component {
         open: false,
         editDate: {
             itemId:this.props.item.id,
-            updateStartDate: '',
-            updateEndDate: '',
-
-
+            updateStartDate: moment(this.props.item.start_date).format('YYYY-MM-DD'),
+            updateEndDate: moment(this.props.item.end_date).format('YYYY-MM-DD'), // create a reducer to handle the dates that need to be pulled.
         }
     }
     // sets the changes in state
@@ -116,16 +115,24 @@ class CalendarItem extends Component {
         }
     } 
     // function handle deleting infomration from the database.
+    //TODO make the dispatch take the dates and hold them to be looked at.
   handleDelete = () =>{
         this.props.dispatch({type: 'DELETE_ITEM', payload: this.props.item.id})
-        console.log('clicked Delete')
+        console.log('clicked Delete', this.state.editDate)
         this.handleClose();
     }
 
 
     //Material UI functions hanlde opening a pop up window and closing one.
   handleClickOpen = () => {
-        this.setState({ open: true });
+    console.log(this.props.item.start_date);
+    console.log('this.props.item',  this.props.item)
+      this.props.dispatch({type: 'EDIT_DATES', payload: this.props.item})
+        this.setState({ 
+          open: true, 
+          
+        });
+
       };
 
   handleClose = () => {
@@ -151,7 +158,7 @@ class CalendarItem extends Component {
                   id="date"
                   label="Start"
                   type="date"
-                  
+                  value={this.state.editDate.updateStartDate}
                   onChange={(event) => this.handleChange(event, 'updateStartDate')}
                   className={classes.textField}
                   InputLabelProps={{
@@ -163,7 +170,7 @@ class CalendarItem extends Component {
                   id="date"
                   label="End"
                   type="date"
-                 
+                  value={this.state.editDate.updateEndDate}
                   onChange={(event) => this.handleChange(event, 'updateEndDate')}
                   className={classes.textField}
                   InputLabelProps={{

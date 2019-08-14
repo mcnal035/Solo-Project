@@ -2,7 +2,7 @@ import { put } from 'redux-saga/effects';
 import axios from 'axios';
 
 
-
+// hanldes the delete payload and sends it to the datbase.
 function* deleteSaga(action){
     console.log('action.payload.id', action.payload);
     try{

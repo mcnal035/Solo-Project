@@ -81,24 +81,24 @@ class Calendar extends Component {
   handleSubmit = (event, i) => {
       event.preventDefault();
       for (let i = 0; i < this.props.reduxStore.getTrip.length; i++) {
-        if ( (this.state.newTripTime.startDate >=  this.props.reduxStore.getTrip[i].start_date &&  this.state.newTripTime.endDate <=  this.props.reduxStore.getTrip[i].end_date) ||
+        if ( (this.state.newTripTime.startDate >=  this.props.reduxStore.getTrip[i].start_date && this.state.newTripTime.endDate <=  this.props.reduxStore.getTrip[i].end_date) ||
           (this.props.reduxStore.getTrip[i].start_date >= this.state.newTripTime.startDate && this.props.reduxStore.getTrip[i].end_date <= this.state.newTripTime.endDate)){
             Swal.fire({
               type: 'error',
-              title: 'Pick a Different Day Dumb-Ass',
-              text: `Something went wrong becasue you're an idiot!`, 
+              title: 'Pick a Different Day',
+              text: `Something went wrong`, 
             });
             return 'good';
-    }
-      }    
-      Swal.fire({
-        position: 'top-end',
-        type: 'success',
-        title: 'Your date has been saved',
-        showConfirmButton: false,
-        timer: 1500
-      })
-        this.props.dispatch({type:'ADD_DATE', payload: this.state.newTripTime}); // need to create a post to DB. 
+          }
+            }    
+            Swal.fire({
+              position: 'top-end',
+              type: 'success',
+              title: 'Your date has been saved',
+              showConfirmButton: false,
+              timer: 1500
+            })
+              this.props.dispatch({type:'ADD_DATE', payload: this.state.newTripTime}); // need to create a post to DB. 
   }
 
 
