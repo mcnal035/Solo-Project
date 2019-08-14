@@ -13,10 +13,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import DialogActions from '@material-ui/core/DialogActions';
 import TextField from '@material-ui/core/TextField';
+import Swal from 'sweetalert2';
 
 //Test Calendar
 
-
+// styles the component
 const styles = theme => ({
     container: {
       display: 'flex',
@@ -48,7 +49,7 @@ const styles = theme => ({
     },
     button:{
       width:20,
-      backgroundColor:'#179600',
+      backgroundColor:'#E65B54',
       
     }
   
@@ -67,6 +68,7 @@ class CalendarItem extends Component {
 
         }
     }
+    // sets the changes in state
     handleChange = (event, propertyName) => {
         this.setState({
             editDate: {
@@ -75,13 +77,37 @@ class CalendarItem extends Component {
             }
         });
     }
+
+    // function checks if dates have already been taken and once it passes the check it sends the update to the database.
     handleEditSubmit = () =>{
-        this.props.dispatch({type: 'EDIT_ITEM', payload: this.state.editDate});
-        this.handleClose();
+      this.handleClose();
+      for (let i = 0; i < this.props.reduxStore.getTrip.length; i++) {
+        if ( (this.state.editDate.updateStartDate >=  this.props.reduxStore.getTrip[i].start_date &&  this.state.editDate.updateEndDate <=  this.props.reduxStore.getTrip[i].end_date) ||
+          (this.props.reduxStore.getTrip[i].start_date >= this.state.editDate.updateStartDate && this.props.reduxStore.getTrip[i].end_date <= this.state.editDate.updateEndDate)){
+            Swal.fire({
+              
+              type: 'error',
+              title: 'Pick a Different Day Dumb-Ass',
+              text: `Something went wrong becasue you're an idiot!`, 
+            });
+            
+            return 'good';
+     }
+      }    
+      Swal.fire({
+        position: 'top-end',
+        type: 'success',
+        title: 'Your date has been saved',
+        showConfirmButton: false,
+        timer: 1500
+      })
+      this.props.dispatch({type: 'EDIT_ITEM', payload: this.state.editDate});
+      this.handleClose();  
     }
+  
 
 
-
+    // compares the id of the user and the items user id then creates a button to allow edits that take place.
       checkId = (item) =>{
         const { classes } = this.props;
         if(this.props.item.user_id === this.props.reduxStore.user.id){
@@ -89,7 +115,7 @@ class CalendarItem extends Component {
            <Button  className={classes.button} onClick={this.handleClickOpen}>Edit</Button></>)
         }
     } 
-
+    // function handle deleting infomration from the database.
     handleDelete = () =>{
         this.props.dispatch({type: 'DELETE_ITEM', payload: this.props.item.id})
         console.log('clicked Delete')
@@ -97,7 +123,7 @@ class CalendarItem extends Component {
     }
 
 
-    //Material UI functions
+    //Material UI functions hanlde opening a pop up window and closing one.
     handleClickOpen = () => {
         this.setState({ open: true });
       };
@@ -109,10 +135,7 @@ class CalendarItem extends Component {
     render(){
         const { classes } = this.props;
 
-
-
-        return(
-            
+        return(     
         <>
         
         <Dialog
@@ -128,7 +151,7 @@ class CalendarItem extends Component {
                   id="date"
                   label="Start"
                   type="date"
-                  defaultValue="2017-05-24"
+                  
                   onChange={(event) => this.handleChange(event, 'updateStartDate')}
                   className={classes.textField}
                   InputLabelProps={{
@@ -140,7 +163,7 @@ class CalendarItem extends Component {
                   id="date"
                   label="End"
                   type="date"
-                  defaultValue="2017-05-24"
+                 
                   onChange={(event) => this.handleChange(event, 'updateEndDate')}
                   className={classes.textField}
                   InputLabelProps={{

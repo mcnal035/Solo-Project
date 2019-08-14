@@ -34,18 +34,29 @@ const styles = theme => ({
       height: '400px',
       overflow:'auto',
     },
+    button:{
+      width:25,
+      margin:20, 
+      backgroundColor: '#E65B54', 
+      fontSize:'10px',
+    },
   
     divButton: {
-      textAlign: 'right',
-
+      float: 'right',
+      marginLeft:'100px',
+      width: '1%',
+      right:'0',
+      
     },
     user:{
       fontSize: '12px',
     },
     text:{
       fontSize: '16px',
-      // marginTop: '12px',
       marginBottom: '10px',
+      width: '800px',
+      textAlign: 'left',
+      display: 'inline-block',
     },
 
   });
@@ -82,11 +93,13 @@ class GuestBookList extends Component {
   }
 
     checkId = (item) =>{
+      const { classes } = this.props;
       if(this.props.item.user_id === this.props.reduxStore.user.id){
-         return(<>
-         <div className={'divButton'}>
-         <Button  style={{width:25,margin:20, float: 'right', backgroundColor: '#E65B54', fontSize:'10px' }} onClick={this.handleDelete}>Remove</Button>
-         </div>
+         return(
+         <>
+         
+         <Button  className={classes.button} onClick={this.handleDelete}>Remove</Button>
+         
          </>)
       }
   } 
@@ -99,10 +112,11 @@ class GuestBookList extends Component {
             
              {/* {JSON.stringify(this.state)} */}
             
-           <div className={classes.user}> {this.props.item.username}{this.props.item.date_stamp.substring(5, 7)+ "/" +this.props.item.date_stamp.substring(8,10)+ "/" + this.props.item.date_stamp.substring(0,4)} </div>
+        <div className={classes.user}>{this.props.item.username}&nbsp;{this.props.item.date_stamp.substring(5, 7)+ "/" +this.props.item.date_stamp.substring(8,10)+ "/" + this.props.item.date_stamp.substring(0,4)} </div>
            
            <div className={classes.text}>
-           {this.checkId(this.props.item)} {this.props.item.text}
+           <div className={classes.divButton}>{this.checkId(this.props.item)}</div> 
+           <div>{this.props.item.text}</div> 
             <br/>
             </div>
             

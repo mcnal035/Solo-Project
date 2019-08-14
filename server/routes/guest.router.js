@@ -10,7 +10,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT "user"."username","guest_log"."user_id", "guest_log"."text", "guest_log"."date_stamp", "guest_log"."id"
     FROM "guest_log"
     JOIN "user" ON "user"."id" = "guest_log"."user_id"
-    ORDER BY "date_stamp";`;
+    ORDER BY "guest_log"."id" DESC;`;
     pool.query(queryText)
         .then( (result) => {
             res.send(result.rows);

@@ -61,6 +61,8 @@ const styles = theme => ({
       textAlign: 'center',
       marginLeft: 'auto',
       marginRight: 'auto',
+      marginTop: '25px',
+      marginBottom: '45px',
     },
     root: {
       ...theme.mixins.gutters(),
@@ -69,8 +71,14 @@ const styles = theme => ({
       backgroundColor: 'lightblue',
       textAlign: 'left',
       overflow:'auto',
+      marginLeft: '60px',
+      marginRight: '60px',
     },
-   
+   title:{
+    marginLeft: '10px',
+     borderBottom:"2px solid",
+
+   },
   });
 
 
@@ -84,7 +92,7 @@ class CalendarList extends Component {
     }
   }
 
-
+ //takes the inputs for month and year and sets state.
   handleChange = (event, propertyToChange) => {
      console.log('event.target.value', event.target.value);
     this.setState({
@@ -94,7 +102,7 @@ class CalendarList extends Component {
       }
     })
   }
-  
+  // function takes month and year and filters the specified month and year to show.
   handleSubmit = () => {
   this.props.dispatch({type:'EDIT_MONTH', payload: this.state.filterDate})
     console.log('clicked submit filter');
@@ -152,7 +160,7 @@ class CalendarList extends Component {
         </div>   
              
       <Paper className={classes.root} elevation={1}>
-        <h2 float="left" style={{borderBottom:"2px solid" }}>Calendar Dates</h2> 
+        <h2 className={classes.title}>Calendar Dates</h2> 
         <Table className={classes.table}>
           <TableHead>
             <TableRow component="tr" scope="row">

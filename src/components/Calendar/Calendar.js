@@ -39,6 +39,14 @@ const styles = theme => ({
       selectEmpty: {
         marginTop: theme.spacing.unit * 2,
       },
+    button:{
+      width:170,
+      backgroundColor:'#179600',
+      marginTop:20,
+      marginRight: '50px',
+      marginBottom: '60',
+      marginLeft:'650px'
+    },
   });
 
 
@@ -54,12 +62,12 @@ class Calendar extends Component {
             reserve: 'None', // this will need to change to a reservation time. Then bring in the props for the user name to show on the map.
         }
     }
-    //Fetch precreated DB List
+    //Fetch precreated DB List to display on the page with the dates
     componentDidMount(){
         this.props.dispatch({type:'FETCH_LIST'});
        
     }
-
+    // sets the state when the event changes.
     handleChange = (event, propertyName) => {
         console.log('entered date',  event.target.value);
         this.setState({
@@ -69,13 +77,9 @@ class Calendar extends Component {
             }
         });
     }
-
+    // submits the changes if they pass the check 
     handleSubmit = (event, i) => {
       event.preventDefault();
-      console.log('get Trip', this.props.reduxStore.getTrip )
-      console.log('')
-      
-      
       for (let i = 0; i < this.props.reduxStore.getTrip.length; i++) {
         if ( (this.state.newTripTime.startDate >=  this.props.reduxStore.getTrip[i].start_date &&  this.state.newTripTime.endDate <=  this.props.reduxStore.getTrip[i].end_date) ||
           (this.props.reduxStore.getTrip[i].start_date >= this.state.newTripTime.startDate && this.props.reduxStore.getTrip[i].end_date <= this.state.newTripTime.endDate)){
@@ -90,7 +94,7 @@ class Calendar extends Component {
       Swal.fire({
         position: 'top-end',
         type: 'success',
-        title: 'Your work has been saved',
+        title: 'Your date has been saved',
         showConfirmButton: false,
         timer: 1500
       })
@@ -106,7 +110,7 @@ render() {
         {this.state.reduxStore}
         <h2 align="center">Calendar</h2> 
       <form onSubmit={this.handleSubmit} className={classes.root} autoComplete="off">
-          
+      
         <TextField
                   id="date"
                   label="Start"
@@ -119,8 +123,8 @@ render() {
                   }}
                 /><br />
       
-      
-      <br /><TextField
+      &nbsp;
+      <br />&nbsp;&nbsp;<TextField
                   id="date"
                   label="End"
                   type="date"
@@ -132,6 +136,7 @@ render() {
                   }}
                 /> 
       <br/> 
+      &nbsp;&nbsp;
          <FormControl className={classes.textField}>
           <InputLabel htmlFor="age-simple">Open/Reserved</InputLabel>
           <Select
@@ -147,7 +152,7 @@ render() {
           </Select>
         </FormControl>
          
-          <Button style={{width:170,backgroundColor:'#179600',marginTop:20,}} type="submit">Submit</Button>
+          <Button className={classes.button} type="submit">Submit</Button>
       </form>
       <div></div>
       

@@ -29,9 +29,15 @@ const styles = theme => ({
       marginBottom: '1px',
       marginLeft: '100px',
        marginRight: '600px',
-      width: '800px',
+      width: '900px',
       height: '400px',
       overflow:'auto',
+    },
+    button:{
+      width:'100px',
+      margin: '20px', 
+      backgroundColor: '#179600', 
+      fontSize:'10px',
     },
     header: {
       marginTop: '1px',
@@ -51,7 +57,7 @@ class GuestBook extends Component {
       }
         
       };
-
+      // grabs teh gues list information and displays it.
       componentDidMount(){
         this.props.dispatch({type:'FETCH_BOOK'});
     }
@@ -85,7 +91,7 @@ class GuestBook extends Component {
             <textarea rows="10" cols="80" maxLength="999" 
                 onChange={(event) => this.handleChange(event, 'log')}></textarea>
 
-             <Button style={{width:50,backgroundColor:'#179600',marginTop:10,}} type="submit">Submit</Button>
+            &nbsp;&nbsp;&nbsp; <Button className={classes.button} type="submit">Submit</Button>
             </form>
             <h1 className={classes.header}>Guest Entries</h1>
             <Paper className={classes.root} elevation={1}>
