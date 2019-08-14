@@ -63,12 +63,12 @@ class Calendar extends Component {
         }
     }
     //Fetch precreated DB List to display on the page with the dates
-    componentDidMount(){
+  componentDidMount(){
         this.props.dispatch({type:'FETCH_LIST'});
        
     }
     // sets the state when the event changes.
-    handleChange = (event, propertyName) => {
+  handleChange = (event, propertyName) => {
         console.log('entered date',  event.target.value);
         this.setState({
             newTripTime: {
@@ -78,7 +78,7 @@ class Calendar extends Component {
         });
     }
     // submits the changes if they pass the check 
-    handleSubmit = (event, i) => {
+  handleSubmit = (event, i) => {
       event.preventDefault();
       for (let i = 0; i < this.props.reduxStore.getTrip.length; i++) {
         if ( (this.state.newTripTime.startDate >=  this.props.reduxStore.getTrip[i].start_date &&  this.state.newTripTime.endDate <=  this.props.reduxStore.getTrip[i].end_date) ||
@@ -102,67 +102,67 @@ class Calendar extends Component {
   }
 
 
-render() {
+  render() {
     const { classes } = this.props;
-  return (
-    <>
+    return (
+      <>
+          
+          {this.state.reduxStore}
+          <h2 align="center">Calendar</h2> 
+        <form onSubmit={this.handleSubmit} className={classes.root} autoComplete="off">
         
-        {this.state.reduxStore}
-        <h2 align="center">Calendar</h2> 
-      <form onSubmit={this.handleSubmit} className={classes.root} autoComplete="off">
+          <TextField
+                    id="date"
+                    label="Start"
+                    type="date"
+                    defaultValue=''
+                    onChange={(event) => this.handleChange(event, 'startDate')}
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  /><br />
+        
+        &nbsp;
+        <br />&nbsp;&nbsp;<TextField
+                    id="date"
+                    label="End"
+                    type="date"
+                    defaultValue=''
+                    onChange={(event) => this.handleChange(event, 'endDate')}
+                    className={classes.textField}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                  /> 
+        <br/> 
+        &nbsp;&nbsp;
+          <FormControl className={classes.textField}>
+            <InputLabel htmlFor="age-simple">Open/Reserved</InputLabel>
+            <Select
+              value={this.state.newTripTime.reserve}
+              onChange={(event) => this.handleChange(event, 'reserve')}
+              inputProps={{
+                name: 'reserved',
+              }}
+            >
+              <MenuItem value=""><em>None</em></MenuItem>
+              <MenuItem value={"Reserved"}>Reserved</MenuItem>
+              <MenuItem value={"Open"}>Open</MenuItem>
+            </Select>
+          </FormControl>
+          
+            <Button className={classes.button} type="submit">Submit</Button>
+        </form>
+        <div></div>
+        
+        <div>
+          <CalendarList />
+        </div>
       
-        <TextField
-                  id="date"
-                  label="Start"
-                  type="date"
-                  defaultValue=''
-                  onChange={(event) => this.handleChange(event, 'startDate')}
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                /><br />
-      
-      &nbsp;
-      <br />&nbsp;&nbsp;<TextField
-                  id="date"
-                  label="End"
-                  type="date"
-                  defaultValue=''
-                  onChange={(event) => this.handleChange(event, 'endDate')}
-                  className={classes.textField}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                /> 
-      <br/> 
-      &nbsp;&nbsp;
-         <FormControl className={classes.textField}>
-          <InputLabel htmlFor="age-simple">Open/Reserved</InputLabel>
-          <Select
-            value={this.state.newTripTime.reserve}
-            onChange={(event) => this.handleChange(event, 'reserve')}
-            inputProps={{
-              name: 'reserved',
-            }}
-          >
-            <MenuItem value=""><em>None</em></MenuItem>
-            <MenuItem value={"Reserved"}>Reserved</MenuItem>
-            <MenuItem value={"Open"}>Open</MenuItem>
-          </Select>
-        </FormControl>
-         
-          <Button className={classes.button} type="submit">Submit</Button>
-      </form>
-      <div></div>
-      
-      <div>
-        <CalendarList />
-      </div>
-    
-    </>
-  );
-}
+      </>
+    );
+  }
 }
 
     const mapStateToProps = reduxStore =>({

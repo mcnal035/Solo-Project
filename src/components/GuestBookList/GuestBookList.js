@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Button from '@material-ui/core/Button';
 
-
+// styles the page.
 const styles = theme => ({
     container: {
       display: 'flex',
@@ -27,7 +27,6 @@ const styles = theme => ({
       backgroundColor: 'lightblue',
       textAlign: 'left',
       marginTop: '20px',
-      // marginBottom: '12px',
       marginLeft: '100px',
       marginRight: '600px',
       width: '600px',
@@ -69,8 +68,8 @@ class GuestBookList extends Component {
       }
       };
     
-
-      handleChange = (event, propToChange) => {
+    // takes the new set state and holds it.
+  handleChange = (event, propToChange) => {
         console.log('event target', event.target.value)
      this.setState({
          newLog:{
@@ -79,27 +78,25 @@ class GuestBookList extends Component {
          }
      });
    };
-
-   handleSubmit = (event) => { 
+   // submits the log to the DB
+  handleSubmit = (event) => { 
     event.preventDefault();
   //   console.log('clicked submit',  this.state.log);
     this.props.dispatch({type:'POST_LOG', payload: this.state.newLog});
-}
+  }
 
-
+  // deletes the log of the user from the DB.
   handleDelete = () => {
     console.log('clicked Delete, this.props.item.id', this.props.item.id);
     this.props.dispatch({type: 'DELETE_BOOK', payload: this.props.item.id})
   }
-
-    checkId = (item) =>{
+    // checks the id of the user and compares it with the item id that displays allowing a remove button to appear.
+  checkId = (item) =>{
       const { classes } = this.props;
       if(this.props.item.user_id === this.props.reduxStore.user.id){
          return(
-         <>
-         
+         <>        
          <Button  className={classes.button} onClick={this.handleDelete}>Remove</Button>
-         
          </>)
       }
   } 
@@ -108,28 +105,25 @@ class GuestBookList extends Component {
     render() {
       const { classes } = this.props;
         return(
-            <> 
-            
+            <>            
              {/* {JSON.stringify(this.state)} */}
-            
-        <div className={classes.user}>{this.props.item.username}&nbsp;{this.props.item.date_stamp.substring(5, 7)+ "/" +this.props.item.date_stamp.substring(8,10)+ "/" + this.props.item.date_stamp.substring(0,4)} </div>
+             {/*lists the dates  */}
+          <div className={classes.user}>{this.props.item.username}&nbsp;{this.props.item.date_stamp.substring(5, 7)+ "/" +this.props.item.date_stamp.substring(8,10)+ "/" + this.props.item.date_stamp.substring(0,4)} </div>
            
-           <div className={classes.text}>
-           <div className={classes.divButton}>{this.checkId(this.props.item)}</div> 
-           <div>{this.props.item.text}</div> 
-            <br/>
-            </div>
+             <div className={classes.text}>
+             <div className={classes.divButton}>{this.checkId(this.props.item)}</div> 
+            <div>{this.props.item.text}</div> 
+             <br/>
+          </div>
             
             </>
         );
     }
 
-
-
 }
-const mapReduxStoreToProps = reduxStore => ({
-    reduxStore
-})
+    const mapReduxStoreToProps = reduxStore => ({
+        reduxStore
+    })
 
 
 export default  withStyles(styles)(connect(mapReduxStoreToProps)(GuestBookList));

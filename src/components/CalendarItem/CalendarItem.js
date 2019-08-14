@@ -69,7 +69,7 @@ class CalendarItem extends Component {
         }
     }
     // sets the changes in state
-    handleChange = (event, propertyName) => {
+  handleChange = (event, propertyName) => {
         this.setState({
             editDate: {
                  ...this.state.editDate,
@@ -79,7 +79,7 @@ class CalendarItem extends Component {
     }
 
     // function checks if dates have already been taken and once it passes the check it sends the update to the database.
-    handleEditSubmit = () =>{
+  handleEditSubmit = () =>{
       this.handleClose();
       for (let i = 0; i < this.props.reduxStore.getTrip.length; i++) {
         if ( (this.state.editDate.updateStartDate >=  this.props.reduxStore.getTrip[i].start_date &&  this.state.editDate.updateEndDate <=  this.props.reduxStore.getTrip[i].end_date) ||
@@ -108,7 +108,7 @@ class CalendarItem extends Component {
 
 
     // compares the id of the user and the items user id then creates a button to allow edits that take place.
-      checkId = (item) =>{
+  checkId = (item) =>{
         const { classes } = this.props;
         if(this.props.item.user_id === this.props.reduxStore.user.id){
            return(<>
@@ -116,7 +116,7 @@ class CalendarItem extends Component {
         }
     } 
     // function handle deleting infomration from the database.
-    handleDelete = () =>{
+  handleDelete = () =>{
         this.props.dispatch({type: 'DELETE_ITEM', payload: this.props.item.id})
         console.log('clicked Delete')
         this.handleClose();
@@ -124,15 +124,15 @@ class CalendarItem extends Component {
 
 
     //Material UI functions hanlde opening a pop up window and closing one.
-    handleClickOpen = () => {
+  handleClickOpen = () => {
         this.setState({ open: true });
       };
 
-    handleClose = () => {
+  handleClose = () => {
         this.setState({ open: false });
       };  
 
-    render(){
+  render() {
         const { classes } = this.props;
 
         return(     
@@ -204,9 +204,9 @@ class CalendarItem extends Component {
 }
 
 
-const mapReduxStoreToProps = reduxStore => ({
-    reduxStore
-})
+    const mapReduxStoreToProps = reduxStore => ({
+        reduxStore
+    })
 
 
 export default  withStyles(styles)(connect(mapReduxStoreToProps)(CalendarItem));

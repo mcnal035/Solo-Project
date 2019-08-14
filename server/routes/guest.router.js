@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-
+// Gets the guest log informaiton and sends it to the DOM.
 router.get('/', rejectUnauthenticated, (req, res) => {
     //console.log('req.body', req.body)
     // return all logs
@@ -23,7 +23,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 
-
+// Post new log to the DB.
 router.post('/', (req,res) => {
      //console.log('req.body', req.body)
      const newTripTimes = req.body;
@@ -40,7 +40,7 @@ router.post('/', (req,res) => {
        res.sendStatus(500);
      });
  });
-
+// allows user to Delete the log if they no longer want people to know about it.
  router.delete('/:id',rejectUnauthenticated, (req, res) => {
      console.log('in Delete router for guest.', req.params.id);
      const idToDelete = req.params.id;

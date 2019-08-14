@@ -109,7 +109,7 @@ class CalendarList extends Component {
   }
 
 
-    render (){
+  render (){
      
       const { classes } = this.props;
       
@@ -178,13 +178,13 @@ class CalendarList extends Component {
             </Table> 
       </Paper>
             </>
-        )
-    } 
+      );
+  } 
 }
 
-const mapReduxStoreToProps = reduxStore => ({
-    reduxStore
-})
+    const mapReduxStoreToProps = reduxStore => ({
+        reduxStore
+    })
 
 
 export default withStyles(styles)(connect(mapReduxStoreToProps)(CalendarList));

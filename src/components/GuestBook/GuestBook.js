@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import GuestBookList from '../GuestBookList/GuestBookList';
 import Paper from '@material-ui/core/Paper';
 
+// styles the page.
 const styles = theme => ({
     container: {
       display: 'flex',
@@ -57,12 +58,12 @@ class GuestBook extends Component {
       }
         
       };
-      // grabs teh gues list information and displays it.
-      componentDidMount(){
+      // grabs the guest list information and displays it.
+  componentDidMount(){
         this.props.dispatch({type:'FETCH_BOOK'});
     }
-
-      handleChange = (event, propToChange) => {
+    //takes the state of the event and sets it to then be dispatched to the DB.
+  handleChange = (event, propToChange) => {
            console.log('event target', event.target.value)
         this.setState({
             newLog:{
@@ -71,8 +72,8 @@ class GuestBook extends Component {
             }
         });
       };
-
-      handleSubmit = (event) => { 
+      // takes the new setState and dispatches it to the Database.
+  handleSubmit = (event) => { 
           event.preventDefault();
         //   console.log('clicked submit',  this.state.log);
           this.props.dispatch({type:'POST_LOG', payload: this.state.newLog});
@@ -81,9 +82,9 @@ class GuestBook extends Component {
 
 
 
-    render() {
+  render() {
         const { classes } = this.props;
-        return(
+    return(
             <>
             {/* {JSON.stringify(this.state)} */}
             <form  onSubmit={this.handleSubmit}>
@@ -99,19 +100,15 @@ class GuestBook extends Component {
             <GuestBookList  key={item.id} item={item} />)}
             </Paper>
             </>
-        )
+        );
     }
-
-
-
 }
 
 
-const mapStateToProps = reduxStore =>({
-    reduxStore,
-   
+      const mapStateToProps = reduxStore =>({
+          reduxStore 
 
-});
+      });
 
 
 export default withStyles(styles)(connect(mapStateToProps)(GuestBook));
