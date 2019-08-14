@@ -98,6 +98,13 @@ class Calendar extends Component {
               showConfirmButton: false,
               timer: 1500
             })
+            this.setState({
+              newTripTime: {
+                startDate: '', //new Date()
+                endDate:  '',
+                reserve: 'None', // this will need to change to a reservation time. Then bring in the props for the user name to show on the map.
+            }
+            })
               this.props.dispatch({type:'ADD_DATE', payload: this.state.newTripTime}); // need to create a post to DB. 
   }
 
@@ -115,7 +122,7 @@ class Calendar extends Component {
                     id="date"
                     label="Start"
                     type="date"
-                    defaultValue=''
+                    value={this.state.newTripTime.startDate}
                     onChange={(event) => this.handleChange(event, 'startDate')}
                     className={classes.textField}
                     InputLabelProps={{
@@ -128,7 +135,7 @@ class Calendar extends Component {
                     id="date"
                     label="End"
                     type="date"
-                    defaultValue=''
+                    value={this.state.newTripTime.endDate}
                     onChange={(event) => this.handleChange(event, 'endDate')}
                     className={classes.textField}
                     InputLabelProps={{

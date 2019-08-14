@@ -67,7 +67,7 @@ class GuestBook extends Component {
            console.log('event target', event.target.value)
         this.setState({
             newLog:{
-            ...this.state.newLog,
+            // ...this.state.newLog,
           [propToChange]: event.target.value,
             }
         });
@@ -75,6 +75,11 @@ class GuestBook extends Component {
       // takes the new setState and dispatches it to the Database.
   handleSubmit = (event) => { 
           event.preventDefault();
+          this.setState({
+            newLog:{
+              log: '',
+            }
+          })
         //   console.log('clicked submit',  this.state.log);
           this.props.dispatch({type:'POST_LOG', payload: this.state.newLog});
       }
@@ -87,9 +92,9 @@ class GuestBook extends Component {
     return(
             <>
             {/* {JSON.stringify(this.state)} */}
-            <form  onSubmit={this.handleSubmit}>
+            <form  value={this.state.newLog.log} onSubmit={this.handleSubmit}>
             <h1>Guest Book</h1>
-            <textarea rows="10" cols="80" maxLength="999" 
+            <textarea rows="10" cols="80" maxLength="999" value={this.state.newLog.log}  
                 onChange={(event) => this.handleChange(event, 'log')}></textarea>
 
             &nbsp;&nbsp;&nbsp; <Button className={classes.button} type="submit">Submit</Button>

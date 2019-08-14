@@ -116,8 +116,25 @@ class CalendarItem extends Component {
     } 
     // function handle deleting infomration from the database.
     //TODO make the dispatch take the dates and hold them to be looked at.
-  handleDelete = () =>{
-        this.props.dispatch({type: 'DELETE_ITEM', payload: this.props.item.id})
+  handleDelete = () =>{ 
+    Swal.fire({
+    title: 'Are you sure?',
+    type: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, delete it!'
+  }).then((result) => {
+    if (result.value) {
+      this.props.dispatch({type: 'DELETE_ITEM', payload: this.props.item.id})
+      Swal.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      )
+    }
+  })
+        // this.props.dispatch({type: 'DELETE_ITEM', payload: this.props.item.id})
         console.log('clicked Delete', this.state.editDate)
         this.handleClose();
     }

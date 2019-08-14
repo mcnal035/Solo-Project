@@ -10,6 +10,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     const queryText = `SELECT "user"."username", "schedule"."start_date", "schedule"."end_date", "schedule"."open_closed", "user"."id","schedule"."user_id", "schedule"."id" 
     from "user"
     JOIN "schedule" ON "schedule"."user_id" = "user"."id"
+    where "start_date" >= now()
     ORDER BY "start_date" ASC;`;
     pool.query(queryText)
         .then( (result) => {
