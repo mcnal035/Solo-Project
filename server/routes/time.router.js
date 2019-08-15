@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-//GET route for all dates.
+//GET route for all dates in schedule table.
 router.get('/', rejectUnauthenticated, (req, res) => {
     //console.log(req.user)
     // return all times
@@ -69,7 +69,7 @@ router.post('/', (req,res) => {
 });
 
 
-
+// sends the updated dates in the query to the database.
 router.put('/:id', (req,res)=>{
     // console.log('req.params.id', req.params.id);
     // console.log('req.body', req.body);
@@ -88,7 +88,7 @@ router.put('/:id', (req,res)=>{
 });
 
 
-
+// Sends Delete query to schedule and removes the date bases on the id of the user and the id of the dates.
 router.delete('/:id',rejectUnauthenticated, (req, res) =>{
     const idToDelete = req.params.id;
     const sqlText = `DELETE FROM schedule WHERE user_id=$1 AND id=$2;`;

@@ -69,7 +69,7 @@ class Calendar extends Component {
     }
     // sets the state when the event changes.
   handleChange = (event, propertyName) => {
-        console.log('entered date',  event.target.value);
+        // console.log('entered date',  event.target.value);
         this.setState({
             newTripTime: {
                  ...this.state.newTripTime,

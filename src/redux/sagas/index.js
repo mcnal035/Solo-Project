@@ -19,6 +19,7 @@ import deleteGuestSaga from './deleteGuestSaga';
 // some sagas trigger other sagas, as an example
 // the registration triggers a login
 // and login triggers setting the user
+// each Saga is called here in this generator function.
 export default function* rootSaga() {
   yield takeEvery('FETCH_LIST', fetchList);
   yield takeEvery('ADD_DATE', postList);

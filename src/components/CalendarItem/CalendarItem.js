@@ -134,16 +134,16 @@ class CalendarItem extends Component {
       )
     }
   })
-        //this.props.dispatch({type: 'DELETE_ITEM', payload: this.props.item.id})
-        console.log('clicked Delete', this.state.editDate)
+        
+        // console.log('clicked Delete', this.state.editDate)
         this.handleClose();
     }
 
 
     //Material UI functions hanlde opening a pop up window and closing one.
   handleClickOpen = () => {
-    console.log(this.props.item.start_date);
-    console.log('this.props.item',  this.props.item)
+    // console.log(this.props.item.start_date);
+    // console.log('this.props.item',  this.props.item)
       this.props.dispatch({type: 'EDIT_DATES', payload: this.props.item})
         this.setState({ 
           open: true, 

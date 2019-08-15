@@ -1,6 +1,7 @@
 import { put  } from 'redux-saga/effects';
 import axios from 'axios';
 
+// posts the new dates to the schedule api  
 function* postList (action) {
     console.log('in post', action.payload);
     try {
