@@ -1,7 +1,7 @@
 import { put  } from 'redux-saga/effects';
 import axios from 'axios';
 
-
+// GETs all the main dates for the calendar and sends them to the DOM.
 
 function* fetchList () {
     try{

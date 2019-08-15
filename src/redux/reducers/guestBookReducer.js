@@ -1,3 +1,5 @@
+// holds the main guest logs.
+
 const guestBookReducer = (state=[], action) => {
     // console.log(state);
     switch (action.type) {

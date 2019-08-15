@@ -2,7 +2,7 @@ import { put  } from 'redux-saga/effects';
 import axios from 'axios';
 
 
-
+// Filters through the dates to bring up the main months.
 function* filterSaga (action) {
     try{
         const response = yield axios.get(`/api/schedule/change?month=${action.payload.month}&year=${action.payload.year}`);

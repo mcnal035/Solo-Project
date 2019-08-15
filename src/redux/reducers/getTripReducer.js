@@ -1,4 +1,4 @@
-
+// Main reducer for holding the date ranges and holds them as an array.
 const getTrip = (state=[], action) => {
     // console.log('from', from);
     // console.log('getTrip state', state);

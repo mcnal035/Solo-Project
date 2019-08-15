@@ -134,7 +134,7 @@ class CalendarItem extends Component {
       )
     }
   })
-        // this.props.dispatch({type: 'DELETE_ITEM', payload: this.props.item.id})
+        //this.props.dispatch({type: 'DELETE_ITEM', payload: this.props.item.id})
         console.log('clicked Delete', this.state.editDate)
         this.handleClose();
     }
