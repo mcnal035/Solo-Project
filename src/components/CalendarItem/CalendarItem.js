@@ -33,7 +33,6 @@ const styles = theme => ({
       marginLeft: theme.spacing.unit,
       marginRight: theme.spacing.unit,
       width: '600px',
-
     },
     root: {
       width: '100%',
@@ -80,14 +79,16 @@ class CalendarItem extends Component {
     // function checks if dates have already been taken and once it passes the check it sends the update to the database.
   handleEditSubmit = () =>{
       this.handleClose();
+      
       for (let i = 0; i < this.props.reduxStore.getTrip.length; i++) {
-        if ( (this.state.editDate.updateStartDate >=  this.props.reduxStore.getTrip[i].start_date &&  this.state.editDate.updateEndDate <=  this.props.reduxStore.getTrip[i].end_date) ||
-          (this.props.reduxStore.getTrip[i].start_date >= this.state.editDate.updateStartDate && this.props.reduxStore.getTrip[i].end_date <= this.state.editDate.updateEndDate)){
+       
+        if ( (moment(this.state.editDate.updateStartDate).format('YYYY/MM/DD') >=  moment(this.props.reduxStore.getTrip[i].start_date).format('YYYY/MM/DD') &&  moment(this.state.editDate.updateEndDate).format('YYYY/MM/DD') <=  moment(this.props.reduxStore.getTrip[i].end_date).format('YYYY/MM/DD')) ||
+          ( moment(this.props.reduxStore.getTrip[i].start_date).format('YYYY/MM/DD') >= moment(this.state.editDate.updateStartDate).format('YYYY/MM/DD') && moment(this.props.reduxStore.getTrip[i].end_date).format('YYYY/MM/DD') <= moment(this.state.editDate.updateEndDate).format('YYYY/MM/DD')) ){
             Swal.fire({
               
               type: 'error',
-              title: 'Pick a Different Day Dumb-Ass',
-              text: `Something went wrong becasue you're an idiot!`, 
+              title: 'Pick a Different',
+              text: `Date has already been selected please pick another day`, 
             });
             
             return 'good';
@@ -129,7 +130,7 @@ class CalendarItem extends Component {
       this.props.dispatch({type: 'DELETE_ITEM', payload: this.props.item.id})
       Swal.fire(
         'Deleted!',
-        'Your file has been deleted.',
+        'Your date has been deleted.',
         'success'
       )
     }
@@ -158,7 +159,7 @@ class CalendarItem extends Component {
 
   render() {
         const { classes } = this.props;
-
+        
         return(     
         <>
         
@@ -213,8 +214,8 @@ class CalendarItem extends Component {
       {/* <Table className={classes.root}> */}
                 <TableRow align="center">
                     <TableCell className={classes.tableCell}>{this.props.item.username}</TableCell> 
-                    <TableCell className={classes.tableCell}>{this.props.item.start_date.substring(5, 7)+ "/" + this.props.item.start_date.substring(8,10)+ "/" + this.props.item.start_date.substring(0,4)}</TableCell>
-                    <TableCell className={classes.tableCell}>{this.props.item.end_date.substring(5, 7)+ "/" + this.props.item.end_date.substring(8,10)+ "/" + this.props.item.end_date.substring(0,4)}</TableCell>
+                    <TableCell className={classes.tableCell}>{moment(this.props.item.start_date).format('MM/DD/YYYY')}</TableCell>
+                    <TableCell className={classes.tableCell}>{moment(this.props.item.end_date).format('MM/DD/YYYY')}</TableCell>
                     <TableCell className={classes.tableCell}>{this.props.item.open_closed}</TableCell>
                     <TableCell className={classes.tableCell}>{this.checkId(this.props.item)}&nbsp;</TableCell>
                 </TableRow>

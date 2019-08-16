@@ -18,6 +18,8 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Swal from 'sweetalert2';
 
+import moment from 'moment';
+
 const styles = theme => ({
     container: {
       display: 'flex',
@@ -81,8 +83,8 @@ class Calendar extends Component {
   handleSubmit = (event, i) => {
       event.preventDefault();
       for (let i = 0; i < this.props.reduxStore.getTrip.length; i++) {
-        if ( (this.state.newTripTime.startDate >=  this.props.reduxStore.getTrip[i].start_date && this.state.newTripTime.endDate <=  this.props.reduxStore.getTrip[i].end_date) ||
-          (this.props.reduxStore.getTrip[i].start_date >= this.state.newTripTime.startDate && this.props.reduxStore.getTrip[i].end_date <= this.state.newTripTime.endDate)){
+        if ( (moment(this.state.newTripTime.startDate).format('YYYY/MM/DD') >=  moment(this.props.reduxStore.getTrip[i].start_date).format('YYYY/MM/DD') && moment(this.state.newTripTime.endDate).format('YYYY/MM/DD') <=  moment(this.props.reduxStore.getTrip[i].end_date).format('YYYY/MM/DD')) ||
+          (moment(this.props.reduxStore.getTrip[i].start_date).format('YYYY/MM/DD') >= moment(this.state.newTripTime.startDate).format('YYYY/MM/DD') && moment(this.props.reduxStore.getTrip[i].end_date).format('YYYY/MM/DD') <= moment(this.state.newTripTime.endDate).format('YYYY/MM/DD'))){
             Swal.fire({
               type: 'error',
               title: 'Pick a Different Day',
