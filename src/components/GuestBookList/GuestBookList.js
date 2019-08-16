@@ -49,11 +49,12 @@ const styles = theme => ({
     },
     user:{
       fontSize: '12px',
+      width: '50%',
     },
     text:{
       fontSize: '16px',
       marginBottom: '10px',
-      width: '800px',
+      width: '90%',
       textAlign: 'left',
       display: 'inline-block',
     },

@@ -30,7 +30,7 @@ const styles = theme => ({
       marginBottom: '1px',
       marginLeft: '100px',
        marginRight: '600px',
-      width: '900px',
+      width: '70%',
       height: '400px',
       overflow:'auto',
     },
@@ -49,6 +49,9 @@ const styles = theme => ({
     menu: {
       width: 200,
     },
+    textArea:{
+      width: '50%', 
+    }
   });
 
 class GuestBook extends Component {
@@ -94,7 +97,7 @@ class GuestBook extends Component {
             {/* {JSON.stringify(this.state)} */}
             <form  value={this.state.newLog.log} onSubmit={this.handleSubmit}>
             <h1>Guest Book</h1>
-            <textarea rows="10" cols="80" maxLength="999" value={this.state.newLog.log}  
+            <textarea rows="10" cols="80" maxLength="999" className={classes.textArea} value={this.state.newLog.log}  
                 onChange={(event) => this.handleChange(event, 'log')}></textarea>
 
             &nbsp;&nbsp;&nbsp; <Button className={classes.button} type="submit">Submit</Button>

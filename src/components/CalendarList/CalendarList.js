@@ -44,6 +44,7 @@ const styles = theme => ({
     // },
     table: {
       minWidth:   'auto',
+      
     },
     tableCell: {
       width: '20%',
@@ -71,8 +72,11 @@ const styles = theme => ({
       backgroundColor: 'lightblue',
       textAlign: 'left',
       overflow:'auto',
+      height: '400px',
       marginLeft: '60px',
       marginRight: '60px',
+      marginBottom: '10px',
+      marginTop: '10px',
     },
    title:{
     marginLeft: '10px',

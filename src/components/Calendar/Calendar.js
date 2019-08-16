@@ -45,9 +45,9 @@ const styles = theme => ({
       width:170,
       backgroundColor:'#179600',
       marginTop:20,
-      marginRight: '50px',
+      marginRight: '500px',
       marginBottom: '60',
-      marginLeft:'650px'
+      marginLeft:'400px'
     },
   });
 
