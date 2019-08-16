@@ -12,6 +12,7 @@ const passport = require('./strategies/user.strategy');
 const userRouter = require('./routes/user.router');
 const timeRouter = require('./routes/time.router');
 const guestRouter = require('./routes/guest.router');
+// const twilioRouter = require('./routes/twilio.router');
 
 
 // Body parser middleware
@@ -29,22 +30,12 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/schedule', timeRouter);
 app.use('/api/guest_log', guestRouter);
+// app.use('/api/user', twilioRouter);
 
 // Serve static files
 app.use(express.static('build'));
 
-// //twilio
-// const accountSid = process.env.TWILIO_ACCOUNT_SID;
-// const authToken = process.env.TWILIO_AUTH_TOKEN;
-// const client = require('twilio')(accountSid, authToken);
-// // twilio message.
-// client.messages
-//   .create({
-//   to: process.env.MY_PHONE_NUMBER,
-//   from: '+16129792992',
-//   body:'New calendar Date has been added.'
-// })
-// .then((message) => console.log(message.sid));
+
 
 // App Set //
 const PORT = process.env.PORT || 5000;

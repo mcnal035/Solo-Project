@@ -81,6 +81,7 @@ class Calendar extends Component {
     }
     // submits the changes if they pass the check 
   handleSubmit = (event, i) => {
+    
       event.preventDefault();
       for (let i = 0; i < this.props.reduxStore.getTrip.length; i++) {
         if ( (moment(this.state.newTripTime.startDate).format('YYYY/MM/DD') >=  moment(this.props.reduxStore.getTrip[i].start_date).format('YYYY/MM/DD') && moment(this.state.newTripTime.endDate).format('YYYY/MM/DD') <=  moment(this.props.reduxStore.getTrip[i].end_date).format('YYYY/MM/DD')) ||
