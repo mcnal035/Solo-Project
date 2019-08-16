@@ -99,11 +99,10 @@ class CalendarItem extends Component {
         type: 'success',
         title: 'Your date has been saved',
         showConfirmButton: false,
-        timer: 800,
+        timer: 1500
       })
       this.props.dispatch({type: 'EDIT_ITEM', payload: this.state.editDate});
       this.handleClose();  
-      
     }
   
 
@@ -120,14 +119,21 @@ class CalendarItem extends Component {
     //TODO make the dispatch take the dates and hold them to be looked at.
   handleDelete = () =>{ 
     Swal.fire({
-    title: 'date deleted',
+    title: 'Are you sure?',
     type: 'warning',
-    showCancelButton: false,
+    showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    timer: 200,
+    confirmButtonText: 'Yes, delete it!'
   }).then((result) => {
+    if (result.value) {
       this.props.dispatch({type: 'DELETE_ITEM', payload: this.props.item.id})
+      Swal.fire(
+        'Deleted!',
+        'Your date has been deleted.',
+        'success'
+      )
+    }
   })
         
         // console.log('clicked Delete', this.state.editDate)

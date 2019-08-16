@@ -11,7 +11,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     from "user"
     JOIN "schedule" ON "schedule"."user_id" = "user"."id"
     where "start_date" >= now()
-    ORDER BY "end_date" ASC;`;
+    ORDER BY "start_date" ASC;`;
     pool.query(queryText)
         .then( (result) => {
             res.send(result.rows);

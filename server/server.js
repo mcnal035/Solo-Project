@@ -30,7 +30,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/schedule', timeRouter);
 app.use('/api/guest_log', guestRouter);
-// app.use('/api/user', twilioRouter);
+// app.use('/api/text', twilioRouter);
 
 // Serve static files
 app.use(express.static('build'));
